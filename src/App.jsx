@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import ButtonAdd from './components/ButtonAdd'
 import Header from './components/Header'
 import Modal from './components/Modal';
-import RowInformation from './components/RowInformation'
+import Principal from './components/Principal';
 import { generarId } from './helpers';
 
 
@@ -13,6 +15,7 @@ function App() {
   const [ editCotizacion, setEdiCotizaion ] = useState({});
 
   const [ busqueda, setBusqueda ] = useState([]);
+  const [ filtrado, setFiltrado ] = useState([]);
 
   useEffect(() => {
     if(!cotizaciones.length){
@@ -43,37 +46,60 @@ function App() {
     }
   }
 
+  const showByState = (path) => {
+    setFiltrado([]);
+    const newCotizaciones = cotizaciones.filter(cotizaciones => cotizaciones.estado === path)
+    // console.log(newCotizaciones)
+    setFiltrado(newCotizaciones)
+  }
+
   return (
     <>
-    <Header cotizaciones={cotizaciones} setBusqueda={setBusqueda}/>
-    <main className="">
-      <div className="flex flex-col py-10 px-20">
-        {
-          !cotizaciones.length && 
-              <p className='text-white text-3xl text-center font-black'>No hay cotizaciones en la lista</p>
-        }
+    <BrowserRouter>
+      <Header 
+        cotizaciones={cotizaciones} 
+        setBusqueda={setBusqueda} 
+        showByState={showByState} 
+        filtrado={filtrado}
+      />
+      <main className="">
 
-        {
-          (cotizaciones.length > 0 && !busqueda.length) && 
-          cotizaciones.map(cotizacion =>  <RowInformation 
-                                            key={cotizacion.id} 
-                                            setModal={setModal} 
-                                            cotizacion={cotizacion}
-                                            setEdiCotizaion={setEdiCotizaion} 
-                                          />)
-          
-          
-        }
-        {
-          (busqueda.length > 0 ) && busqueda.map(cotizacion =>  <RowInformation 
-            key={cotizacion.id} 
-            setModal={setModal} 
-            cotizacion={cotizacion}
-            setEdiCotizaion={setEdiCotizaion} 
-          />)
-        }
-      </div>
-    </main>
+        <Routes>
+        <Route path='/' element={ <Principal 
+                                    cotizaciones={cotizaciones}
+                                    busqueda={busqueda}
+                                    setModal={setModal}
+                                    setEdiCotizaion={setEdiCotizaion}
+                                    filtrado={filtrado}
+                                    showByState={showByState}
+                                  />} 
+        />
+        <Route path='/emitido' element={ <Principal 
+                                    cotizaciones={cotizaciones}
+                                    busqueda={busqueda}
+                                    setModal={setModal}
+                                    setEdiCotizaion={setEdiCotizaion}
+                                    filtrado={filtrado}
+                                    showByState={showByState}
+                                  />} 
+        />
+
+        <Route path='/cotizado' element={ <Principal 
+                                            cotizaciones={cotizaciones}
+                                            busqueda={busqueda}
+                                            setModal={setModal}
+                                            setEdiCotizaion={setEdiCotizaion}
+                                            filtrado={filtrado}
+                                            showByState={showByState}
+                                          />} 
+                />
+
+        </Routes>  
+        
+      </main>
+      
+    </BrowserRouter>
+    
     <ButtonAdd setModal={setModal}/>
 
     { modal && <Modal 
