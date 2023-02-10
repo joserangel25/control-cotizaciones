@@ -6,6 +6,13 @@ import Header from './components/Header'
 import Modal from './components/Modal';
 import Principal from './components/Principal';
 import { generarId } from './helpers';
+import PrivateRoute from './layout/PrivateRoute';
+import PublicRoute from './layout/PublicRoute';
+import Login from './pages/Login';
+import Avisos from './pages/private/Avisos';
+import Cotizaciones from './pages/private/Cotizaciones';
+import Emisiones from './pages/private/Emisiones';
+import LayoutPrivate from './pages/private/LayoutPrivate';
 
 
 function App() {
@@ -56,16 +63,9 @@ function App() {
   return (
     <>
     <BrowserRouter>
-      <Header 
-        cotizaciones={cotizaciones} 
-        setBusqueda={setBusqueda} 
-        showByState={showByState} 
-        filtrado={filtrado}
-      />
-      <main className="">
 
         <Routes>
-        <Route path='/' element={ <Principal 
+        {/* <Route path='/' element={ <Principal 
                                     cotizaciones={cotizaciones}
                                     busqueda={busqueda}
                                     setModal={setModal}
@@ -92,11 +92,19 @@ function App() {
                                             filtrado={filtrado}
                                             showByState={showByState}
                                           />} 
-                />
+                /> */}
+          <Route path='/' element={<PublicRoute />}>
+            <Route index element={<Login />} />
+          </Route>
 
+          <Route 
+            path='/dashboard' 
+            element={<PrivateRoute />}>
+            <Route path='avisos' element={<Avisos />} />
+            <Route path='cotizaciones' element={<Cotizaciones />} />
+            <Route path='emisiones' element={<Emisiones />} />
+          </Route>
         </Routes>  
-        
-      </main>
       
     </BrowserRouter>
     
