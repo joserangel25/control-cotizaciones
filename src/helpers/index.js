@@ -23,7 +23,6 @@ export const formatearPrima = (valor) => {
     currency: 'COP',
     minimumFractionDigits: 0
   })
-
   return changeCurrency.format(valor)
 }
 

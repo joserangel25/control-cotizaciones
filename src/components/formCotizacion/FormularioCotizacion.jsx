@@ -1,4 +1,5 @@
 import { ASEGURADORAS } from "../../constants"
+import { formatearPrima } from "../../helpers";
 import { useFormulario } from "../../hooks/useFormulario"
 
 export default function FormularioCotizacion() {
