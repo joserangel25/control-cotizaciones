@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import ButtonAdd from './components/ButtonAdd'
 import Header from './components/Header'
@@ -13,6 +13,7 @@ import Avisos from './pages/private/Avisos';
 import Cotizaciones from './pages/private/Cotizaciones';
 import Emisiones from './pages/private/Emisiones';
 import LayoutPrivate from './pages/private/LayoutPrivate';
+import NuevaCotizacion from './pages/private/NuevaCotizacion';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
   const [ cotizaciones, setCotizaciones ] = useState( JSON.parse(localStorage.getItem('cotizaciones')) ?? []);
   const [ modal, setModal ] = useState(false);
   const [ editCotizacion, setEdiCotizaion ] = useState({});
+
+  // const { pathname } = useLocation()
 
   const [ busqueda, setBusqueda ] = useState([]);
   const [ filtrado, setFiltrado ] = useState([]);
@@ -64,58 +67,31 @@ function App() {
     <>
     <BrowserRouter>
 
-        <Routes>
-        {/* <Route path='/' element={ <Principal 
-                                    cotizaciones={cotizaciones}
-                                    busqueda={busqueda}
-                                    setModal={setModal}
-                                    setEdiCotizaion={setEdiCotizaion}
-                                    filtrado={filtrado}
-                                    showByState={showByState}
-                                  />} 
-        />
-        <Route path='/emitido' element={ <Principal 
-                                    cotizaciones={cotizaciones}
-                                    busqueda={busqueda}
-                                    setModal={setModal}
-                                    setEdiCotizaion={setEdiCotizaion}
-                                    filtrado={filtrado}
-                                    showByState={showByState}
-                                  />} 
-        />
+      <Routes>
+        <Route path='/' element={<PublicRoute />}>
+          <Route index element={<Login />} />
+        </Route>
 
-        <Route path='/cotizado' element={ <Principal 
-                                            cotizaciones={cotizaciones}
-                                            busqueda={busqueda}
-                                            setModal={setModal}
-                                            setEdiCotizaion={setEdiCotizaion}
-                                            filtrado={filtrado}
-                                            showByState={showByState}
-                                          />} 
-                /> */}
-          <Route path='/' element={<PublicRoute />}>
-            <Route index element={<Login />} />
-          </Route>
-
-          <Route 
-            path='/dashboard' 
-            element={<PrivateRoute />}>
-            <Route path='avisos' element={<Avisos />} />
-            <Route path='cotizaciones' element={<Cotizaciones />} />
-            <Route path='emisiones' element={<Emisiones />} />
-          </Route>
-        </Routes>  
+        <Route 
+          path='/dashboard' 
+          element={<PrivateRoute />}>
+          <Route path='avisos' element={<Avisos />} />
+          <Route path='cotizaciones' element={<Cotizaciones />} />
+          <Route path='emisiones' element={<Emisiones />} />
+          <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
+        </Route>
       
+      {/* { !pathname.includes('nueva') && <ButtonAdd /> } */}
+      </Routes>  
     </BrowserRouter>
     
-    <ButtonAdd setModal={setModal}/>
-
+{/* 
     { modal && <Modal 
                   setModal={setModal} 
                   addCotizacion={addCotizacion} 
                   editCotizacion={editCotizacion}
                   setEdiCotizaion={setEdiCotizaion} 
-                /> }
+                /> } */}
     </>
   )
 }

@@ -8,7 +8,7 @@ export default function VerticalMenu() {
     <nav aria-label="Main Nav" className="flex flex-col space-y-1">
       <Link
         to="/dashboard/avisos"
-        className={`${pathname.includes('avisos') && 'bg-gray-100'} group flex items-center rounded-lg  px-4 py-2 text-gray-700`}
+        className={`${pathname.includes('avisos') && 'bg-gray-100 text-gray-700'} group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-gray-700`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@ export default function VerticalMenu() {
 
       <Link
         to="/dashboard/cotizaciones"
-        className={`${pathname.includes('cotizaciones') && 'bg-gray-100'} group flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700`}
+        className={`${pathname.includes('cotizacion') && 'bg-gray-100 text-gray-700'} group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-gray-700`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ export default function VerticalMenu() {
         <span className="ml-3 text-sm font-medium"> Cotizaciones </span>
 
         <span
-          className="ml-auto shrink-0 rounded-full bg-gray-100 py-0.5 px-3 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"
+          className={`${pathname.includes('cotizacion') && 'bg-gray-200' } ml-auto shrink-0 rounded-full bg-gray-100 py-0.5 px-3 text-xs text-gray-600  group-hover:text-gray-700`}
         >
           5
         </span>
@@ -63,7 +63,7 @@ export default function VerticalMenu() {
 
       <Link
         to="/dashboard/emisiones"
-        className={`${pathname.includes('emisiones') && 'bg-gray-100'} group flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700`}
+        className={`${pathname.includes('emisiones') && 'bg-gray-100 text-gray-700'} group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-gray-700`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ export default function VerticalMenu() {
 
       <Link
         to=""
-        className="group flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+        className="group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-gray-700"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ export default function VerticalMenu() {
 
       <Link
         to=""
-        className="group flex items-center rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+        className="group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 active:text-gray-700 hover:text-gray-700"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
