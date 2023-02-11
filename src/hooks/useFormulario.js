@@ -1,15 +1,22 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { agregarCotizacion } from '../store/slices/cotizacionesSlice'
+import { generarId } from '../helpers'
 
 export function useFormulario() {
 
+  const dispatch = useDispatch()  
+  const navigate = useNavigate()
   const [ datos, setDatos ] = useState({
-    nombre: '',
+    nombreAsegurado: '',
     placa: '',
-    fecha: '',
-    aseguradora: '',
+    fechaCotizacion: '',
+    mejorAseguradora: '',
     estado: '',
     prima: ''
-  })
+  });
+
 
   const changeDatos = (e) => {
     setDatos({
@@ -25,6 +32,8 @@ export function useFormulario() {
       return
     }
 
+    dispatch( agregarCotizacion({...datos, id: generarId()}) )
+    navigate('/dashboard/cotizaciones')
     //Por hacer
     // addCotizacion(datos)
     //LLevar hacia el listado de cotizaciones

@@ -14,7 +14,7 @@ export default function FormularioCotizacion() {
             <label htmlFor='nombre' className='font-bold text-gray-500 mb-2'>Nombre asegurado:</label>
             <input 
               id='nombre'
-              name='nombre'
+              name='nombreAsegurado'
               value={datos.nombre}
               onChange={changeDatos}
               className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
@@ -35,9 +35,10 @@ export default function FormularioCotizacion() {
           </div>
 
           <div className=''>
-            <label className='font-bold text-gray-500 mb-2'>Mejor aseguradora:</label>
+            <label className='font-bold text-gray-500 mb-2' htmlFor='aseguradora'>Mejor aseguradora:</label>
             <select 
-              name='aseguradora' 
+              id='aseguradora'
+              name='mejorAseguradora' 
               value={datos.aseguradora} 
               onChange={changeDatos} 
               className='w-full p-2 border-2 mt-1 focus:border-indigo-500 rounded-md focus:outline-none '
@@ -74,7 +75,7 @@ export default function FormularioCotizacion() {
             <input 
               type='date'
               id='fecha'
-              name='fecha'
+              name='fechaCotizacion'
               value={datos.fecha}
               onChange={changeDatos}
               placeholder='fecha de cotizacion'

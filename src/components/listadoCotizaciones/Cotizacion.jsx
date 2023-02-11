@@ -5,8 +5,8 @@ export default function Cotizacion({ cotizacion }) {
 
   return (
     <li className='py-2 flex items-center border-b-2 justify-between'>
-      <div className=' w-2/6 lg:w-3/12 flex flex-col lg:flex-row lg:gap-2'>
-        <p className='font-bold text-gray-700'>{nombreAsegurado}</p>
+      <div className='w-2/6 lg:w-3/12 flex flex-col lg:flex-row lg:gap-2'>
+        <p className='font-bold text-gray-700 uppercase'>{nombreAsegurado}</p>
         <p>{placa}</p>
       </div>
 
