@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { agregarCotizacion } from '../store/slices/cotizacionesSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { agregarCotizacion, editarCotizacion, quitarCotizacionObtenida } from '../store/slices/cotizacionesSlice'
 import { generarId } from '../helpers'
 
 export function useFormulario() {
 
+  const { cotizacionAccion: cotizacion } = useSelector(state => state.cotizaciones)
   const dispatch = useDispatch()  
   const navigate = useNavigate()
+
+  //datos del formulario
   const [ datos, setDatos ] = useState({
     nombreAsegurado: '',
     placa: '',
@@ -17,7 +20,12 @@ export function useFormulario() {
     prima: ''
   });
 
-
+  useEffect(() => {
+    if(cotizacion.id){
+      setDatos(cotizacion)
+    }
+  }, [])
+  
   const changeDatos = (e) => {
     setDatos({
       ...datos,
@@ -32,13 +40,16 @@ export function useFormulario() {
       return
     }
 
-    dispatch( agregarCotizacion({...datos, id: generarId()}) )
+    if(cotizacion.id){
+      dispatch( editarCotizacion({...datos, id: cotizacion.id}) )
+    } else {
+      dispatch( agregarCotizacion({...datos, id: generarId()}) )
+    }
+
     navigate('/dashboard/cotizaciones')
-    //Por hacer
-    // addCotizacion(datos)
-    //LLevar hacia el listado de cotizaciones
-    // setModal(false)
+
   }
+
   return {
     changeDatos,
     handleSubmit,

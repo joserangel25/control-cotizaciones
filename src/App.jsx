@@ -79,9 +79,9 @@ function App() {
           <Route path='cotizaciones' element={<Cotizaciones />} />
           <Route path='emisiones' element={<Emisiones />} />
           <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
+          <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
         </Route>
       
-      {/* { !pathname.includes('nueva') && <ButtonAdd /> } */}
       </Routes>  
     </BrowserRouter>
     

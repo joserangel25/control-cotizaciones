@@ -15,7 +15,7 @@ export default function FormularioCotizacion() {
             <input 
               id='nombre'
               name='nombreAsegurado'
-              value={datos.nombre}
+              value={datos.nombreAsegurado}
               onChange={changeDatos}
               className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
               placeholder="Jose Rangel"
@@ -39,7 +39,7 @@ export default function FormularioCotizacion() {
             <select 
               id='aseguradora'
               name='mejorAseguradora' 
-              value={datos.aseguradora} 
+              value={datos.mejorAseguradora} 
               onChange={changeDatos} 
               className='w-full p-2 border-2 mt-1 focus:border-indigo-500 rounded-md focus:outline-none '
             >
@@ -76,7 +76,7 @@ export default function FormularioCotizacion() {
               type='date'
               id='fecha'
               name='fechaCotizacion'
-              value={datos.fecha}
+              value={datos.fechaCotizacion}
               onChange={changeDatos}
               placeholder='fecha de cotizacion'
               className='w-full p-2 mt-1 border-2 focus:border-indigo-500 rounded-md focus:outline-none'
