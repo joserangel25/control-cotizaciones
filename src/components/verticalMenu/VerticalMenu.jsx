@@ -1,8 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
 export default function VerticalMenu() {
   const { pathname } = useLocation()
+  const { cotizaciones } = useSelector(state => state.cotizaciones)
 
   return (
     <nav aria-label="Main Nav" className="flex flex-col space-y-1">
@@ -57,7 +59,7 @@ export default function VerticalMenu() {
         <span
           className={`${pathname.includes('cotizacion') && 'bg-gray-200' } ml-auto shrink-0 rounded-full bg-gray-100 py-0.5 px-3 text-xs text-gray-600  group-hover:text-gray-700`}
         >
-          5
+          {cotizaciones.length}
         </span>
       </Link>
 

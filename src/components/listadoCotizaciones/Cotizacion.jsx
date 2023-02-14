@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
+import { Link } from "react-router-dom";
 import { formatearFecha, formatearPrima } from "../../helpers";
 import { obtenerCotizacion } from "../../store/slices/cotizacionesSlice"
 
@@ -8,9 +9,15 @@ export default function Cotizacion({ cotizacion }) {
   const navigate = useNavigate();
   const { nombreAsegurado, placa, prima, mejorAseguradora, fechaCotizacion, estado, id } = cotizacion
   const handleClickEditar = () => {
-    dispatch( obtenerCotizacion(cotizacion) )
+    dispatch( obtenerCotizacion(cotizacion.id) )
     navigate(`/dashboard/editar-cotizacion/${id}`)
   }
+
+  const handleClickVerDetalles = () => {
+    dispatch( obtenerCotizacion(cotizacion.id) )
+    navigate(`/dashboard/ver-cotizacion/${id}`)
+  }
+
   return (
     <li className='py-2 flex items-center border-b-2 justify-between'>
       <div className='w-2/6 lg:w-4/12 flex flex-col lg:flex-row lg:gap-2'>
@@ -37,7 +44,8 @@ export default function Cotizacion({ cotizacion }) {
         </svg>
 
         </button>
-        <button title="ver detalles">
+
+        <button title="ver detalles" onClick={handleClickVerDetalles}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 hover:text-sky-800">
           <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
           <path fillRule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />

@@ -2,9 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   cotizaciones: JSON.parse(localStorage.getItem('cotizaciones')) ?? [],
-  cotizacionAccion: {} 
+  cotizacionAccion: {},
 }
-
 export const cotizacionesSlice = createSlice({
   name:'cotizaciones',
   initialState,
@@ -14,7 +13,8 @@ export const cotizacionesSlice = createSlice({
       localStorage.setItem('cotizaciones', JSON.stringify(state.cotizaciones))
     },
     obtenerCotizacion: (state, action) => {
-      state.cotizacionAccion = action.payload
+      const cotizacion = state.cotizaciones.find(cotizacion => cotizacion.id === action.payload)
+      state.cotizacionAccion = cotizacion
     },
     quitarCotizacionObtenida: (state) => {
       state.cotizacionAccion = {}

@@ -11,6 +11,7 @@ import PublicRoute from './layout/PublicRoute';
 import Login from './pages/Login';
 import Avisos from './pages/private/Avisos';
 import Cotizaciones from './pages/private/Cotizaciones';
+import DetalleCotizacion from './pages/private/DetalleCotizacion';
 import Emisiones from './pages/private/Emisiones';
 import LayoutPrivate from './pages/private/LayoutPrivate';
 import NuevaCotizacion from './pages/private/NuevaCotizacion';
@@ -79,6 +80,7 @@ function App() {
           <Route path='cotizaciones' element={<Cotizaciones />} />
           <Route path='emisiones' element={<Emisiones />} />
           <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
+          <Route path='ver-cotizacion/:id' element={<DetalleCotizacion />} />
           <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
         </Route>
       
