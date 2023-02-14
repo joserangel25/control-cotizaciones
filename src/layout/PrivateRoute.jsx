@@ -10,9 +10,7 @@ export default function PrivateRoute() {
   useEffect(() => {
     if(!auth){
       navigate('/')
-    } else {
-      navigate('/dashboard/avisos')
-    }
+    } 
   }, [])
 
   return (

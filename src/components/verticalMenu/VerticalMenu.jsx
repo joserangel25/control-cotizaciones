@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 export default function VerticalMenu() {
   const { pathname } = useLocation()
@@ -8,7 +8,7 @@ export default function VerticalMenu() {
 
   return (
     <nav aria-label="Main Nav" className="flex flex-col space-y-1">
-      <Link
+      <NavLink
         to="/dashboard/avisos"
         className={`${pathname.includes('avisos') && 'bg-gray-100 text-gray-700'} group flex items-center rounded-lg px-4 py-2 text-white hover:bg-gray-100 hover:text-gray-700`}
       >
@@ -33,7 +33,7 @@ export default function VerticalMenu() {
         </svg>
 
         <span className="ml-3 text-sm font-medium"> Notificaciones </span>
-      </Link>
+      </NavLink>
 
       <Link
         to="/dashboard/cotizaciones"

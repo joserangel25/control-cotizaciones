@@ -73,9 +73,7 @@ function App() {
           <Route index element={<Login />} />
         </Route>
 
-        <Route 
-          path='/dashboard' 
-          element={<PrivateRoute />}>
+        <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='avisos' element={<Avisos />} />
           <Route path='cotizaciones' element={<Cotizaciones />} />
           <Route path='emisiones' element={<Emisiones />} />
