@@ -8,7 +8,7 @@ import Principal from './components/Principal';
 import { generarId } from './helpers';
 import PrivateRoute from './layout/PrivateRoute';
 import PublicRoute from './layout/PublicRoute';
-import Login from './pages/Login';
+import Login from './pages/public/Login';
 import Avisos from './pages/private/Avisos';
 import Cotizaciones from './pages/private/Cotizaciones';
 import DetalleCotizacion from './pages/private/DetalleCotizacion';
