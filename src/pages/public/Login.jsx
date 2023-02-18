@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router"
+// import { useNavigate, Link } from "react-router"
 import { useOnLoginMutation } from "../../store/api/authApiSlice"
 import { login } from "../../store/slices/authSlice"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Login() {
 
@@ -85,7 +86,6 @@ export default function Login() {
           type="password" 
           name="password" 
           id="password" 
-          placeholder='correo@correo.com'
           className='outline-none rounded-md p-2' 
           value={password}
           onChange={(e) => setPassword(e.target.value)} 
@@ -98,6 +98,10 @@ export default function Login() {
         className='w-full p-2 bg-amber-500 text-gray-700 uppercase font-bold rounded-md shadow-md cursor-pointer'
         
       />
+
+      <div className="mt-5 text-end text-white text-sm">
+        <Link to='/'>Recuperar contraseña</Link>
+      </div>
     </form>
     </div>
 

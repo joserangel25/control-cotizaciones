@@ -1,10 +1,23 @@
-import React from 'react'
+import { useNavigate } from 'react-router';
 import { Menu, MenuItem, Avatar, Divider, ListItemIcon } from '@mui/material'
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
+//Redux
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../../store/slices/authSlice';
+
 export default function MenuOptions({ open, handleClose, anchorEl }) {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleCerrarSesion = () => {
+    handleClose()
+    dispatch(logoutAction())
+    navigate('/')
+  }
   return (
     <Menu
         anchorEl={anchorEl}
@@ -54,7 +67,7 @@ export default function MenuOptions({ open, handleClose, anchorEl }) {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleCerrarSesion}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
