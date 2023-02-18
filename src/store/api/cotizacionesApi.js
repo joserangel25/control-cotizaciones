@@ -4,12 +4,10 @@ export const cotizacionesApi = createApi({
   reducerPath: 'cotizacionesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
-    credentials: "include",
+    // credentials: "include",
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.token;
-        console.log(getState());
-        console.log("HEADERS", headers);
-        console.log(token);
+        const token = getState().auth.auth.token;
+        headers.set('authorization', `Bearer ${token}`)
         return headers;
     },
   }),

@@ -5,23 +5,26 @@ import { formatearFecha, formatearPrima } from "../../helpers";
 import { obtenerCotizacion } from "../../store/slices/cotizacionesSlice"
 
 export default function Cotizacion({ cotizacion }) {
+
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { nombreAsegurado, placa, prima, mejorAseguradora, fechaCotizacion, estado, id } = cotizacion
+
+  const { cliente, placa, prima, mejorAseguradora, fecha, estado, _id } = cotizacion
+
   const handleClickEditar = () => {
-    dispatch( obtenerCotizacion(cotizacion.id) )
-    navigate(`/dashboard/editar-cotizacion/${id}`)
+    dispatch( obtenerCotizacion(cotizacion._id) )
+    navigate(`/dashboard/editar-cotizacion/${_id}`)
   }
 
   const handleClickVerDetalles = () => {
-    dispatch( obtenerCotizacion(cotizacion.id) )
-    navigate(`/dashboard/ver-cotizacion/${id}`)
+    dispatch( obtenerCotizacion(cotizacion._id) )
+    navigate(`/dashboard/ver-cotizacion/${_id}`)
   }
 
   return (
     <li className='py-2 flex items-center border-b-2 justify-between'>
       <div className='w-2/6 lg:w-4/12 flex flex-col lg:flex-row lg:gap-2'>
-        <p className='font-bold text-gray-700 uppercase'>{nombreAsegurado}</p>
+        <p className='font-bold text-gray-700 uppercase'>{cliente}</p>
         <p>{placa}</p>
       </div>
 
@@ -32,7 +35,7 @@ export default function Cotizacion({ cotizacion }) {
 
       <div className='w-1/6 lg:w-3/12 flex items-center flex-col lg:flex-row lg:gap-2'>
         <p className='font-bold text-gray-700'>{estado}</p>
-        <p className='text-sm text-gray-700'>{formatearFecha(fechaCotizacion)}</p>
+        <p className='text-sm text-gray-700'>{formatearFecha(fecha)}</p>
       </div>
 
       {/* Botones para accion */}

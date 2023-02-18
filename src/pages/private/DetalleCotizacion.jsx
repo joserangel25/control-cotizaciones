@@ -4,32 +4,33 @@ import { useParams } from "react-router-dom"
 import DetalleCliente from "../../components/dealleInteracciones/DetalleCliente"
 import DetalleInteracciones from "../../components/dealleInteracciones/DetalleInteracciones"
 import TitlePage from "../../components/TitlePage"
-import { formatearPrima } from "../../helpers"
+import { formatearFecha, formatearPrima } from "../../helpers"
 import { obtenerCotizacion } from '../../store/slices/cotizacionesSlice'
 
 export default function DetalleCotizacion() {
   const { cotizacionAccion: cotizacion } = useSelector(state => state.cotizaciones)
+
   const params = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if(!cotizacion.id){
+    if(!cotizacion._id){
       dispatch( obtenerCotizacion(params.id) )
     }
   }, [])
  
-  if(!cotizacion.id){
+  if(!cotizacion._id){
     return <p>Cargando...</p>
   }
 
   return (
     <>
-      <TitlePage detalle={`${cotizacion.nombreAsegurado} - ${cotizacion.placa}`} /> 
+      <TitlePage detalle={`${cotizacion.cliente} - ${cotizacion.placa}`} /> 
       
       <div className='flex items-center justify-between bg-stone-50'>
         <div className="ml-2">
           <p className="font-bold">Fecha de cotización: 
-            <span className="font-normal"> {cotizacion?.fechaCotizacion}</span>
+            <span className="font-normal"> {formatearFecha(cotizacion?.fecha)}</span>
           </p>
           <p className="font-bold">Mejor opción: 
             <span className="font-normal"> {cotizacion?.mejorAseguradora} - {formatearPrima(cotizacion?.prima)}</span>

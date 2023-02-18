@@ -11,8 +11,7 @@ const opciones = {
   day: '2-digit'
 }
 export const formatearFecha = (fecha) => {
-
-  const [y, m, d] = fecha.split('-')
+  const [y, m, d] = fecha.split('T')[0].split('-')
   const nuevaFecha = new Date(`${y}-${m}-${Number(d) + 1}`);
   return nuevaFecha.toLocaleDateString('es-ES', opciones);
 }

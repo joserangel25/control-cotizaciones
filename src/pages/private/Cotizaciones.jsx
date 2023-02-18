@@ -13,7 +13,7 @@ export default function Cotizaciones() {
       <ListadoCotizaciones>
         {
           cotizaciones.map(cotizacion => (
-            <Cotizacion key={cotizacion.id} cotizacion={cotizacion} />
+            <Cotizacion key={cotizacion._id} cotizacion={cotizacion} />
           ))
         }
       </ListadoCotizaciones>
