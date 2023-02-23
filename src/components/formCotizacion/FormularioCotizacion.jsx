@@ -1,22 +1,27 @@
+import { useState } from "react";
 import { ASEGURADORAS } from "../../constants"
-import { formatearPrima } from "../../helpers";
+import { formatearFecha } from "../../helpers";
 import { useFormulario } from "../../hooks/useFormulario"
+import Alerta from "../alerta/Alerta";
 
 export default function FormularioCotizacion() {
 
-  const { datos, changeDatos, handleSubmit } = useFormulario();
+  const { datos, changeDatos, handleSubmit, results, resultsEditar } = useFormulario();
 
   return (
     <>
+      {
+        (results.isLoading || resultsEditar.isLoading ) && <Alerta alerta={{msg: 'cargando...'}} />
+      }
       <form onSubmit={handleSubmit}>
         <div className='grid grid-cols-2 gap-3'>
 
           <div className=''>
-            <label htmlFor='nombre' className='font-bold text-gray-500 mb-2'>Nombre asegurado:</label>
+            <label htmlFor='nombre' className='font-bold text-gray-500 mb-2'>Cliente:</label>
             <input 
               id='nombre'
-              name='nombreAsegurado'
-              value={datos.nombreAsegurado}
+              name='cliente'
+              value={datos.cliente}
               onChange={changeDatos}
               className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
               placeholder="Jose Rangel"
@@ -59,7 +64,7 @@ export default function FormularioCotizacion() {
           </div>
 
           <div className=''>
-            <label htmlFor='prima' className='font-bold text-gray-500 mb-2'>Valor de prima:</label>
+            <label htmlFor='prima' className='font-bold text-gray-500 mb-2'>Prima:</label>
             <input 
               type='number'
               id='prima'
@@ -71,40 +76,69 @@ export default function FormularioCotizacion() {
             />
           </div>
 
+          {
+            datos?._id && 
+            (
+              <>
+                <div className=''>
+                  <label htmlFor='fecha' className='font-bold text-gray-500 mb-2'>Fecha de cotización:</label>
+                  <input 
+                    type='date'
+                    id='fecha'
+                    name='fecha'
+                    value={formatearFecha(datos.fecha)}
+                    onChange={changeDatos}
+                    placeholder='fecha de cotizacion'
+                    className='w-full p-2 mt-1 border-2 focus:border-indigo-500 rounded-md focus:outline-none'
+                  />
+                </div>
+
+                <div className=''>
+                  <label className='font-bold text-gray-500 mb-2'>Estado:</label>
+                  <select 
+                    name='estado' 
+                    value={datos.estado} 
+                    onChange={changeDatos}
+                    className='w-full p-2 mt-1 border-2 focus:border-indigo-500 rounded-md focus:outline-none'
+                  >
+                    <option value=''>--Seleccionar</option>
+                    <option value='Cotizado'>Cotizado</option>
+                    <option value='Emitido'>Emitido</option>
+                    <option value='Desistido'>Desistido</option>              
+                  </select>
+                </div>
+              </>
+            )
+          }
+
           <div className=''>
-            <label htmlFor='fecha' className='font-bold text-gray-500 mb-2'>Fecha de cotización:</label>
+            <label htmlFor='referido' className='font-bold text-gray-500 mb-2'>Referido:</label>
             <input 
-              type='date'
-              id='fecha'
-              name='fechaCotizacion'
-              value={datos.fechaCotizacion}
+              id='referido'
+              name='referido'
+              value={datos.referido}
               onChange={changeDatos}
-              placeholder='fecha de cotizacion'
-              className='w-full p-2 mt-1 border-2 focus:border-indigo-500 rounded-md focus:outline-none'
+              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
+              placeholder="Ej. Jose Rangel"
             />
           </div>
-
           <div className=''>
-            <label className='font-bold text-gray-500 mb-2'>Estado:</label>
-            <select 
-              name='estado' 
-              value={datos.estado} 
+            <label htmlFor='observaciones' className='font-bold text-gray-500 mb-2'>Observaciones</label>
+            <input 
+              id='observaciones'
+              name='observaciones'
+              value={datos.observaciones}
               onChange={changeDatos}
-              className='w-full p-2 mt-1 border-2 focus:border-indigo-500 rounded-md focus:outline-none'
-            >
-              <option value=''>--Seleccionar</option>
-              <option value='cotizado'>Cotizado</option>
-              <option value='emitido'>Emitido</option>
-              <option value='desistido'>Desistido</option>              
-            </select>
+              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
+              placeholder="Ej. Hijo del sr. Armando Del vecchio"
+            />
           </div>
-
         </div>
 
         <input 
           type='submit'
           className='w-full p-3 mt-6 bg-sky-800 rounded-md text-white uppercase font-bold mr-1 hover:bg-sky-700 transition-colors cursor-pointer'
-          value={datos.id ? 'Editar' : 'Agregar'}
+          value={datos._id ? 'Editar' : 'Agregar'}
         />
       </form>
     </>

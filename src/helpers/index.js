@@ -10,10 +10,14 @@ const opciones = {
   month: 'long',
   day: '2-digit'
 }
-export const formatearFecha = (fecha) => {
+export const formatearFecha = (fecha, type) => {
   const [y, m, d] = fecha.split('T')[0].split('-')
-  const nuevaFecha = new Date(`${y}-${m}-${Number(d) + 1}`);
-  return nuevaFecha.toLocaleDateString('es-ES', opciones);
+  const nuevaFecha = new Date(`${y}-${m}-${d}`);
+  if(type === 1){
+    return nuevaFecha.toLocaleDateString('es-ES', opciones);
+  } else {
+    return `${y}-${m}-${Number(d) - 1}`
+  }
 }
 
 

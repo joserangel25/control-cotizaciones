@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   cotizaciones: [],
   cotizacionAccion: {},
+  alerta: {}
 }
 export const cotizacionesSlice = createSlice({
   name:'cotizaciones',
@@ -20,12 +21,15 @@ export const cotizacionesSlice = createSlice({
       state.cotizacionAccion = {}
     },
     editarCotizacion: (state, action) => {
-      state.cotizaciones = state.cotizaciones.map(cotizacion => cotizacion._id === action.payload.id ? action.payload : cotizacion)
-      localStorage.setItem('cotizaciones', JSON.stringify(state.cotizaciones))
+      state.cotizaciones = state.cotizaciones.map(cotizacion => cotizacion._id === action.payload._id ? action.payload : cotizacion)
+      // localStorage.setItem('cotizaciones', JSON.stringify(state.cotizaciones))
       state.cotizacionAccion = {}
     },
     setCotizacionesStore: (state, action) => {
       state.cotizaciones = action.payload;
+    },
+    setAlerta: (state, action) => {
+      state.alerta = action.payload
     }
   }
 })
@@ -34,4 +38,5 @@ export const { agregarCotizacion,
                obtenerCotizacion, 
                editarCotizacion, 
                quitarCotizacionObtenida,
-               setCotizacionesStore } = cotizacionesSlice.actions
+               setCotizacionesStore,
+               setAlerta } = cotizacionesSlice.actions

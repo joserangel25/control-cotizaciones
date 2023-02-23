@@ -9,7 +9,7 @@ export default function NuevaCotizacion() {
   
   return (
     <>
-      <TitlePage title={ cotizacion?.id ? 'Editar Cotizacion' : 'Agregar cotizacion' } /> 
+      <TitlePage title={ cotizacion?._id ? 'Editar Cotizacion' : 'Agregar cotizacion' } /> 
       <FormularioCotizacion />
     </>
   )

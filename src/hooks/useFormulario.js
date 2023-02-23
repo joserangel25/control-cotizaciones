@@ -1,30 +1,65 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { agregarCotizacion, editarCotizacion, quitarCotizacionObtenida } from '../store/slices/cotizacionesSlice'
-import { generarId } from '../helpers'
+import { agregarCotizacion, 
+         editarCotizacion, 
+         quitarCotizacionObtenida,
+         setAlerta } from '../store/slices/cotizacionesSlice'
+import { useRegistrarCotizacionMutation, useEditCotizacionStoreMutation } from '../store/api/cotizacionesApi'
+
 
 export function useFormulario() {
-
+  const [ registrarCotizacion, results ] = useRegistrarCotizacionMutation()
+  const [ editarCotizacionApi, resultsEditar ] = useEditCotizacionStoreMutation()
   const { cotizacionAccion: cotizacion } = useSelector(state => state.cotizaciones)
   const dispatch = useDispatch()  
   const navigate = useNavigate()
 
+  const restablecerApp = () => {
+    dispatch( quitarCotizacionObtenida() )
+        navigate('/dashboard/cotizaciones')
+  
+        setTimeout(() => {
+          dispatch(setAlerta({}))
+        }, 1500);
+  }
+
   //datos del formulario
   const [ datos, setDatos ] = useState({
-    nombreAsegurado: '',
+    cliente: '',
     placa: '',
-    fechaCotizacion: '',
+    fecha: '',
     mejorAseguradora: '',
     estado: '',
-    prima: ''
+    prima: '',
+    observaciones: '',
+    referido: ''
   });
 
   useEffect(() => {
-    if(cotizacion.id){
+    if(cotizacion._id){
       setDatos(cotizacion)
     }
   }, [])
+
+  //Escuchando los cambios cuando se guarde una cotización en la base de datos
+  useEffect(() => {
+    if(results.status === 'fulfilled'){
+      dispatch( setAlerta({msg: 'Se ha agregado correctamente la cotización'}))
+      restablecerApp()
+    }
+
+  }, [results])
+
+  //Escuchando los cambios cuando se edite una cotización en la base de datos
+  useEffect(() => {
+    if(resultsEditar.status === 'fulfilled'){
+      dispatch( setAlerta({msg: 'Se ha actualizado correctamente la cotización'}))
+      restablecerApp()
+    }
+
+  }, [resultsEditar])
+  
   
   const changeDatos = (e) => {
     setDatos({
@@ -35,24 +70,27 @@ export function useFormulario() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(Object.values(datos).includes('')){
+    const [d1, d2, d3, d4, d5, d6, d7, d8] = Object.values(datos)
+    if([d1,d2, d4, d6, d7, d8].includes('')){
       alert('Todos los campos son obligatorios')
       return
     }
 
-    if(cotizacion.id){
-      dispatch( editarCotizacion({...datos, id: cotizacion.id}) )
+    if(cotizacion._id){
+      editarCotizacionApi({...datos, id: cotizacion._id})
     } else {
-      dispatch( agregarCotizacion({...datos, id: generarId()}) )
+      const { fecha, estado, ...rest } = datos
+      registrarCotizacion(rest)
     }
 
-    navigate('/dashboard/cotizaciones')
 
   }
 
   return {
     changeDatos,
     handleSubmit,
-    datos
+    datos,
+    results,
+    resultsEditar
   }
 }

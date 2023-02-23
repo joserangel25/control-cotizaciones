@@ -1,6 +1,6 @@
 import Interaccion from './Interaccion'
 
-export default function DetalleInteracciones() {
+export default function DetalleInteracciones({interacciones}) {
   return (
     <div className='h-full'>
       <div className='flex justify-between items-center'>
@@ -17,10 +17,12 @@ export default function DetalleInteracciones() {
       </div>
 
       <div className='h-[80%] overflow-x-hidden mt-2 scrollbar'>
+      {
+        interacciones.length ? interacciones.map(interaccion => (
+          <Interaccion ke={interaccion._id} interaccion={interaccion}/>
+        )) : 'No se ha tenido contacto con el cliente aún'
+      }
 
-      <Interaccion />
-      <Interaccion />
-      <Interaccion />
       </div>
     </div>
   )

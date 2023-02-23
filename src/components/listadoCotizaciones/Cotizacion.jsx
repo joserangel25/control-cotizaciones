@@ -35,7 +35,7 @@ export default function Cotizacion({ cotizacion }) {
 
       <div className='w-1/6 lg:w-3/12 flex items-center flex-col lg:flex-row lg:gap-2'>
         <p className='font-bold text-gray-700'>{estado}</p>
-        <p className='text-sm text-gray-700'>{formatearFecha(fecha)}</p>
+        <p className='text-sm text-gray-700'>{formatearFecha(fecha, 1)}</p>
       </div>
 
       {/* Botones para accion */}
