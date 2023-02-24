@@ -6,6 +6,7 @@ import DetalleInteracciones from "../../components/dealleInteracciones/DetalleIn
 import TitlePage from "../../components/TitlePage"
 import { formatearFecha, formatearPrima } from "../../helpers"
 import { obtenerCotizacion } from '../../store/slices/cotizacionesSlice'
+import Alerta from '../../components/alerta/Alerta'
 
 import  { useGetCotizacionStoreQuery } from '../../store/api/cotizacionesApi'
 
@@ -15,14 +16,18 @@ export default function DetalleCotizacion() {
   const params = useParams()
   const  { data, isLoading, isError, Error } = useGetCotizacionStoreQuery(params.id)
   const dispatch = useDispatch()
+  const { alerta } = useSelector(state => state.cotizaciones)
 
  
   if(isLoading){
     return <p>Cargando...</p>
   }
-
+  const { msg } = alerta;
   return (
     <>
+    {
+      msg && <Alerta alerta={alerta} />
+    }
       <TitlePage detalle={`${data?.cotizacion.cliente} - ${data?.cotizacion.placa}`} /> 
       
       <div className='flex items-center justify-between bg-stone-50'>

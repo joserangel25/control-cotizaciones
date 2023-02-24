@@ -1,6 +1,7 @@
 import { useLocation } from "react-router";
 import ButtonAdd from "../../components/ButtonAdd";
 import Header from "../../components/Header";
+import Modal from "../../components/modal/Modal";
 import VerticalMenu from "../../components/verticalMenu/VerticalMenu";
 
 
@@ -22,6 +23,7 @@ export default function LayoutPrivate({ Outlet }) {
         </div>
 
       </main>
+      <Modal />
     </>
   )
 }

@@ -1,11 +1,20 @@
 import Interaccion from './Interaccion'
+import { useDispatch } from 'react-redux'
+import { setModal } from '../../store/slices/modalSlice';
 
 export default function DetalleInteracciones({interacciones}) {
+  const dispatch = useDispatch();
+
+  const handleOpenModal = () => {
+    dispatch( setModal('INTERACCION') )
+  }
   return (
     <div className='h-full'>
       <div className='flex justify-between items-center'>
         <h3 className='text-xl font-bold text-gray-600 mb-3'>Últimas interacciones</h3>
         <button 
+          onClick={handleOpenModal}
+          title='Agregar'
           className='text-sky-700 hover:text-sky-800 hover:scale-110 transition-colors p-2 uppercase font-bold  rounded-lg'
           >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -19,7 +28,7 @@ export default function DetalleInteracciones({interacciones}) {
       <div className='h-[80%] overflow-x-hidden mt-2 scrollbar'>
       {
         interacciones.length ? interacciones.map(interaccion => (
-          <Interaccion ke={interaccion._id} interaccion={interaccion}/>
+          <Interaccion key={interaccion._id} interaccion={interaccion}/>
         )) : 'No se ha tenido contacto con el cliente aún'
       }
 

@@ -4,14 +4,13 @@ export const cotizacionesApi = createApi({
   reducerPath: 'cotizacionesApi',
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
-    // credentials: "include",
     prepareHeaders: (headers, { getState }) => {
         const token = getState().auth.auth.token;
         headers.set('authorization', `Bearer ${token}`)
         return headers;
     },
   }),
-  tagTypes: ['Cotizaciones',],
+  tagTypes: ['Cotizaciones','Cotizacion'],
   endpoints: (builder) => ({
     getCotizaciones: builder.query({
       query: () => '/cotizaciones',
@@ -26,7 +25,8 @@ export const cotizacionesApi = createApi({
       invalidatesTags: ['Cotizaciones']
     }),
     getCotizacionStore: builder.query({
-      query: (id) => `/cotizaciones/${id}`
+      query: (id) => `/cotizaciones/${id}`,
+      providesTags: ['Cotizacion']
     }),
     editCotizacionStore: builder.mutation({
       query: (newCoti) => ({
@@ -35,6 +35,14 @@ export const cotizacionesApi = createApi({
         body: newCoti
       }),
       invalidatesTags: ['Cotizaciones']
+    }),
+    crearInteraccionStore: builder.mutation({
+      query: (interaccion) => ({
+        url: '/interacciones',
+        method: 'POST',
+        body: interaccion
+      }),
+      invalidatesTags: ['Cotizacion']
     }) 
   })
 })
@@ -42,4 +50,5 @@ export const cotizacionesApi = createApi({
 export const { useGetCotizacionesQuery, 
                useRegistrarCotizacionMutation,
                useGetCotizacionStoreQuery,
-               useEditCotizacionStoreMutation } = cotizacionesApi
+               useEditCotizacionStoreMutation,
+               useCrearInteraccionStoreMutation } = cotizacionesApi

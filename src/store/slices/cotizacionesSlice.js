@@ -22,7 +22,6 @@ export const cotizacionesSlice = createSlice({
     },
     editarCotizacion: (state, action) => {
       state.cotizaciones = state.cotizaciones.map(cotizacion => cotizacion._id === action.payload._id ? action.payload : cotizacion)
-      // localStorage.setItem('cotizaciones', JSON.stringify(state.cotizaciones))
       state.cotizacionAccion = {}
     },
     setCotizacionesStore: (state, action) => {
