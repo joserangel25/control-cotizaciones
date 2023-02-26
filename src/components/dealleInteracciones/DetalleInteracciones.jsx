@@ -8,6 +8,7 @@ export default function DetalleInteracciones({interacciones}) {
   const handleOpenModal = () => {
     dispatch( setModal('INTERACCION') )
   }
+
   return (
     <div className='h-full'>
       <div className='flex justify-between items-center'>

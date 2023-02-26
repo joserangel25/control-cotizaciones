@@ -23,7 +23,7 @@ export default function FormularioCotizacion() {
               name='cliente'
               value={datos.cliente}
               onChange={changeDatos}
-              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
+              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 uppercase'
               placeholder="Jose Rangel"
             />
           </div>
@@ -129,7 +129,7 @@ export default function FormularioCotizacion() {
               name='observaciones'
               value={datos.observaciones}
               onChange={changeDatos}
-              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
+              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 uppercase'
               placeholder="Ej. Hijo del sr. Armando Del vecchio"
             />
           </div>

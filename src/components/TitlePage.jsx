@@ -13,7 +13,7 @@ export default function TitlePage({title, detalle = null}) {
   }
   return (
     <div className='flex justify-between items-center'>
-        <h2 className='font-black text-gray-700 text-4xl mb-5'>{ detalle ?? title }</h2>
+        <h2 className='font-black text-gray-700 text-4xl mb-5 uppercase'>{ detalle ?? title }</h2>
 
         {
           title  && 

@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { agregarCotizacion, 
-         editarCotizacion, 
-         quitarCotizacionObtenida,
+import { quitarCotizacionObtenida,
          setAlerta } from '../store/slices/cotizacionesSlice'
 import { useRegistrarCotizacionMutation, useEditCotizacionStoreMutation } from '../store/api/cotizacionesApi'
 

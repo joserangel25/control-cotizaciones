@@ -7,6 +7,7 @@ import Logout from '@mui/icons-material/Logout';
 //Redux
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../store/slices/authSlice';
+import { setModal } from '../../store/slices/modalSlice';
 
 export default function MenuOptions({ open, handleClose, anchorEl }) {
 
@@ -15,8 +16,15 @@ export default function MenuOptions({ open, handleClose, anchorEl }) {
 
   const handleCerrarSesion = () => {
     handleClose()
-    dispatch(logoutAction())
-    navigate('/')
+    dispatch(setModal('LOADING'))
+
+    setTimeout(() => {
+      dispatch(logoutAction())
+      dispatch(setModal(''))
+
+      navigate('/')
+    }, 1500)
+    
   }
   return (
     <Menu

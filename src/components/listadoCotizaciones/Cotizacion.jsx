@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
-import { Link } from "react-router-dom";
 import { formatearFecha, formatearPrima } from "../../helpers";
 import { obtenerCotizacion } from "../../store/slices/cotizacionesSlice"
 
