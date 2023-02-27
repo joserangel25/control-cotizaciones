@@ -46,7 +46,9 @@ export default function DetalleCotizacion() {
           </p>
         </div>
 
-        <p className="p-2 bg-sky-700 text-white font-bold text-lg shadow-md uppercase">{data?.cotizacion?.estado}</p>
+        <p className={`${data?.cotizacion?.estado == 'Cotizado' ? 'bg-sky-700' : 'bg-green-600'} p-2 text-white font-bold text-lg shadow-md uppercase`}>
+          {data?.cotizacion?.estado}
+        </p>
       </div>
       
       <div className="w-full flex gap-4 mt-5 h-72">

@@ -17,9 +17,12 @@ export default function Cotizaciones() {
       }
       <ListadoCotizaciones>
         {
-          cotizaciones.map(cotizacion => (
-            <Cotizacion key={cotizacion._id} cotizacion={cotizacion} />
-          ))
+          cotizaciones.map(cotizacion => {
+            if(cotizacion.estado !== 'Cotizado'){
+              return
+            }
+            return (<Cotizacion key={cotizacion._id} cotizacion={cotizacion} />)
+          })
         }
       </ListadoCotizaciones>
     </>
