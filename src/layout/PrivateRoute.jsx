@@ -5,7 +5,7 @@ import LayoutPrivate from "../pages/private/LayoutPrivate"
 
 
 //redux
-import { useGetCotizacionesQuery, fetchData } from "../store/api/cotizacionesApi"
+import { useGetCotizacionesQuery } from "../store/api/cotizacionesApi"
 import { setCotizacionesStore } from "../store/slices/cotizacionesSlice"
 import { useAutenticacionByTokenQuery } from "../store/api/authApiSlice"
 import { login } from "../store/slices/authSlice"

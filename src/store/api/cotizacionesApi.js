@@ -47,13 +47,6 @@ export const cotizacionesApi = createApi({
   })
 })
 
-export const fetchData = async () => {
-  const response = await cotizacionesApi.baseQuery.baseUrl.get('/cotizaciones');
-  const data = response.data;
-  console.log(data)
-  return data;
-};
-
 export const { useGetCotizacionesQuery, 
                useRegistrarCotizacionMutation,
                useGetCotizacionStoreQuery,
