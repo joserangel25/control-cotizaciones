@@ -1,11 +1,14 @@
+import { useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { useTotal } from '../../hooks/useTotal'
 
-export default function VerticalMenu() {
+export default function VerticalMenu({showMenu}) {
   const { pathname } = useLocation()
-
   const { total: totalCotizado } = useTotal('Cotizado')
   const { total: totalEmitido } = useTotal('Emitido')
+
+  
+  
 
   return (
     <nav aria-label="Main Nav" className="flex flex-col space-y-1">
