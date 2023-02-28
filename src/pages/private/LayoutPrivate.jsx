@@ -40,7 +40,7 @@ export default function LayoutPrivate({ Outlet }) {
           <VerticalMenu showMenu={ListenerShowMenu} />
         </div>
         
-        <div className="md:w-3/4 p-10">
+        <div className="md:w-3/4 p-5 md:p-10" style={{height: 'calc(100vh - 87px)'}} >
           <Outlet />
         { !pathname.includes('nueva') && <ButtonAdd /> }
         </div>

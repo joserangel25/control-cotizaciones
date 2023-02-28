@@ -17,7 +17,7 @@ export default function Header({setBusqueda, showByState, showMenu, filtrado: fi
   }
 
   return (
-    <header className='bg-gray-50 px-10 py-5 flex justify-between shadow-lg shadow-stone-200/50'>
+    <header className='bg-gray-50 px-5 md:px-10 py-5 flex justify-between shadow-lg shadow-stone-200/50'>
 
       <div className='flex gap-2 items-center'>
         <button
