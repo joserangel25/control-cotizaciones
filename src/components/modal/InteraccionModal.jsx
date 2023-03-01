@@ -35,13 +35,11 @@ export default function InteraccionModal({handleClose}) {
     setDisable(true)
 
     try {
-      console.log({ descripcion, fecha, idCotizacion})
       const res = await  agregarInteraccion({descripcion, fecha, cotizacion: idCotizacion}).unwrap()
       console.log(res)
       setDisable(false)
       handleClose()
       dispatch( setAlerta({msg: 'Se guardó correctamente!'}) )
-
       
     } catch (error) {
       console.log(error)
@@ -94,18 +92,27 @@ export default function InteraccionModal({handleClose}) {
         onChange={(e) => setDescripcion(e.target.value)}
         error={error}
       />
+      <Divider />
+
+      <DialogActions>
+        <Button
+          variant="contained" 
+          onClick={handleClose} 
+          color='error'>
+          Cancelar
+        </Button>
+        <Button 
+          onClick={handleAgregar} 
+          autoFocus 
+          disabled={disable}
+          variant="contained"
+          endIcon={disable && <CircularProgress size={24} />}
+        >
+          Agregar
+        </Button>
+      </DialogActions>
     </DialogContent>
-    <DialogActions>
-      <Button onClick={handleClose} color='error'>Cancelar</Button>
-      <Button 
-        onClick={handleAgregar} 
-        autoFocus 
-        disabled={disable} 
-        endIcon={disable && <CircularProgress size={24} />}
-      >
-        Agregar
-      </Button>
-    </DialogActions>
+
     </>
   )
 }

@@ -12,8 +12,8 @@ export default function TitlePage({title, detalle = null}) {
     navigate('/dashboard/cotizaciones')
   }
   return (
-    <div className='flex justify-between items-center'>
-        <h2 className='font-black text-gray-700 text-4xl mb-5 uppercase'>{ detalle ?? title }</h2>
+    <div className='flex justify-between items-center mb-3 md:mb-0'>
+        <h2 className='font-black text-gray-700 text-lg md:text-4xl md:mb-5 uppercase'>{ detalle ?? title }</h2>
 
         {
           title  && 

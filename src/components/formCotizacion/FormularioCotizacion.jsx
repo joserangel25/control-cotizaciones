@@ -13,8 +13,8 @@ export default function FormularioCotizacion() {
       {
         (results.isLoading || resultsEditar.isLoading ) && <Alerta alerta={{msg: 'cargando...'}} />
       }
-      <form onSubmit={handleSubmit}>
-        <div className='grid grid-cols-2 gap-3'>
+      <form onSubmit={handleSubmit} className='h-5/6 overflow-x-hidden scrollbar'>
+        <div className='grid md:grid-cols-2 gap-3'>
 
           <div className=''>
             <label htmlFor='nombre' className='font-bold text-gray-500 mb-2'>Cliente:</label>

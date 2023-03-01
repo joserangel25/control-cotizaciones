@@ -1,7 +1,6 @@
 
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
-import CircularProgress from '@mui/material/CircularProgress';
 
 
 import DetalleCliente from "../../components/dealleInteracciones/DetalleCliente"
@@ -11,6 +10,10 @@ import { formatearFecha, formatearPrima } from "../../helpers"
 import Alerta from '../../components/alerta/Alerta'
 
 import  { useGetCotizacionStoreQuery } from '../../store/api/cotizacionesApi'
+
+//MUI
+import CircularProgress from '@mui/material/CircularProgress';
+import Chip from '@mui/material/Chip';
 
 export default function DetalleCotizacion() {
 
@@ -35,8 +38,12 @@ export default function DetalleCotizacion() {
       msg && <Alerta alerta={alerta} />
     }
       <TitlePage detalle={`${data?.cotizacion.cliente} - ${data?.cotizacion.placa}`} /> 
-      
-      <div className='flex items-center justify-between bg-stone-50'>
+      <div className="h-5/6 overflow-x-hidden scrollbar">
+
+      <div 
+        className='flex flex-col md:flex-row items-center justify-between bg-stone-50 p-2 gap-2 shadow-md rounded-lg'
+      >
+
         <div className="ml-2">
           <p className="font-bold">Fecha de cotización: 
             <span className="font-normal"> {formatearFecha(data?.cotizacion?.fecha)}</span>
@@ -46,22 +53,25 @@ export default function DetalleCotizacion() {
           </p>
         </div>
 
-        <p className={`${data?.cotizacion?.estado == 'Cotizado' ? 'bg-sky-700' : 'bg-green-600'} p-2 text-white font-bold text-lg shadow-md uppercase`}>
-          {data?.cotizacion?.estado}
-        </p>
+        <Chip 
+          label={data?.cotizacion?.estado} 
+          color={data?.cotizacion?.estado == 'Cotizado' ? 'primary' : 'success'}
+        />
       </div>
       
-      <div className="w-full flex gap-4 mt-5 h-72">
-        <div className="w-2/6 px-2 py-5 bg-stone-50 rounded-lg  shadow-md">
+      <div className="w-full flex flex-col md:flex-row gap-4 mt-5 h-72">
+        <div className="md:w-2/6 px-2 py-5 bg-stone-50 rounded-lg shadow-md">
           <DetalleCliente 
             observaciones={data?.cotizacion?.observaciones}
             referido={data?.cotizacion?.referido}
           />
         </div>
-        <div className="w-4/6 px-2 py-5 bg-stone-50 rounded-lg shadow-md ">
+        <div className="md:w-4/6 px-2 py-5 bg-stone-50 rounded-lg shadow-md ">
          <DetalleInteracciones interacciones={data?.interacciones}/>
         </div>
       </div>
+      </div>
+
     </>
   )
 }

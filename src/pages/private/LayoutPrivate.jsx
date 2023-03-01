@@ -8,11 +8,20 @@ import VerticalMenu from "../../components/verticalMenu/VerticalMenu";
 
 export default function LayoutPrivate({ Outlet }) {
   const menuRef = useRef()
+  const outletRef = useRef()
   const { pathname } = useLocation()
 
+  const showOutlet = () => {
+    if(!menuRef.current.classList.contains('hidden')){
+      outletRef.current.classList.add('hidden')
+    } else {
+      outletRef.current.classList.remove('hidden')
+    }
+  }
   //funcion que abre o cierra el menu vertical desde el header
   const showVerticalMenu = () => {
     menuRef.current.classList.toggle('hidden')
+    showOutlet()
   }
 
   const ListenerShowMenu = () => {
@@ -24,6 +33,7 @@ export default function LayoutPrivate({ Outlet }) {
   //escuchamos los cambios del pathname para ver si hay que ocultar el menu vertical
   useEffect(() => {
     ListenerShowMenu()
+    showOutlet()
   }, [pathname])
 
   return (
@@ -40,12 +50,16 @@ export default function LayoutPrivate({ Outlet }) {
           <VerticalMenu showMenu={ListenerShowMenu} />
         </div>
         
-        <div className="md:w-3/4 p-5 md:p-10" style={{height: 'calc(100vh - 87px)'}} >
+        <div 
+          ref={outletRef}
+          className="md:w-3/4 p-5 md:p-10" 
+          style={{height: 'calc(100vh - 87px)'}} 
+        >
           <Outlet />
-        { !pathname.includes('nueva') && <ButtonAdd /> }
+          { !pathname.includes('nueva') && <ButtonAdd /> }
         </div>
 
-      </main>
+        </main>
       <Modal />
     </>
   )
