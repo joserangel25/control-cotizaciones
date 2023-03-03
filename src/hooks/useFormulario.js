@@ -15,12 +15,12 @@ export function useFormulario() {
 
   const restablecerApp = () => {
     dispatch( quitarCotizacionObtenida() )
-        navigate('/dashboard/cotizaciones')
-  
-        setTimeout(() => {
-          dispatch(setAlerta({}))
-        }, 1500);
-  }
+    navigate('/dashboard/cotizaciones')
+
+    setTimeout(() => {
+      dispatch(setAlerta({}))
+    }, 3000);
+}
 
   //datos del formulario
   const [ datos, setDatos ] = useState({
@@ -43,7 +43,7 @@ export function useFormulario() {
   //Escuchando los cambios cuando se guarde una cotización en la base de datos
   useEffect(() => {
     if(results.status === 'fulfilled'){
-      dispatch( setAlerta({msg: 'Se ha agregado correctamente la cotización'}))
+      dispatch( setAlerta({isOpen: true, message: 'Se ha agregado correctamente la cotización', type: 'success'}))
       restablecerApp()
     }
 
@@ -52,7 +52,7 @@ export function useFormulario() {
   //Escuchando los cambios cuando se edite una cotización en la base de datos
   useEffect(() => {
     if(resultsEditar.status === 'fulfilled'){
-      dispatch( setAlerta({msg: 'Se ha actualizado correctamente la cotización'}))
+      dispatch( setAlerta({isOpen: true, message: 'Se ha actualizado correctamente la cotización', type: 'success'}))
       restablecerApp()
     }
 

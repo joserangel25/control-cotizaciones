@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
+// import { } from '@reduxjs/toolkit/query'
+// import { invalidateQueries } from '@reduxjs/toolkit/query';
 // import { useNavigate, Link } from "react-router"
 import { useOnLoginMutation } from "../../store/api/authApiSlice"
 import { login } from "../../store/slices/authSlice"
@@ -39,7 +41,7 @@ export default function Login() {
       setError({ msg: 'todos los campos son obligatorios', error: true })
       return
     }
-
+    // invalidateQueries('Cotizaciones')
     await handleLogin({email, password}).unwrap();
     setEmail('')
     setPassword('')

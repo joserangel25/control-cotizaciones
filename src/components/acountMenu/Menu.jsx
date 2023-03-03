@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router';
+
+
 import { Menu, MenuItem, Avatar, Divider, ListItemIcon } from '@mui/material'
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
@@ -6,6 +8,7 @@ import Logout from '@mui/icons-material/Logout';
 
 //Redux
 import { useDispatch } from 'react-redux';
+import { cotizacionesApi } from '../../store/api/cotizacionesApi';
 import { logoutAction } from '../../store/slices/authSlice';
 import { setModal } from '../../store/slices/modalSlice';
 
@@ -17,6 +20,9 @@ export default function MenuOptions({ open, handleClose, anchorEl }) {
   const handleCerrarSesion = () => {
     handleClose()
     dispatch(setModal('LOADING'))
+    //Con el siguiente dispatch invalidamos la query para la próxima consulta. Con el inicio de sesión
+    //se debe volver a hacer la consulta sí o sí eliminando la caché para evitar error de información
+    dispatch(cotizacionesApi.util.resetApiState())
 
     setTimeout(() => {
       dispatch(logoutAction())

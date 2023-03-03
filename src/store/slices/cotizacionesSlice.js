@@ -3,7 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   cotizaciones: [],
   cotizacionAccion: {},
-  alerta: {}
+  alerta: {
+    isOpen: false,
+    message: '',
+    type: 'success'
+  }
 }
 export const cotizacionesSlice = createSlice({
   name:'cotizaciones',

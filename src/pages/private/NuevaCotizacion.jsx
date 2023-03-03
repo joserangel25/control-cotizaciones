@@ -1,7 +1,8 @@
-import FormularioCotizacion from '../../components/formCotizacion/FormularioCotizacion'
 import { useSelector } from 'react-redux';
+import FormularioCotizacion from '../../components/formCotizacion/FormularioCotizacion'
 
 import TitlePage from '../../components/TitlePage';
+
 
 export default function NuevaCotizacion() {
 
@@ -11,6 +12,7 @@ export default function NuevaCotizacion() {
     <>
       <TitlePage title={ cotizacion?._id ? 'Editar Cotizacion' : 'Agregar cotizacion' } /> 
       <FormularioCotizacion />
+
     </>
   )
 }

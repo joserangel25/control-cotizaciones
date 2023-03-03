@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ASEGURADORAS } from "../../constants"
 import { formatearFecha } from "../../helpers";
 import { useFormulario } from "../../hooks/useFormulario"
@@ -8,12 +7,15 @@ export default function FormularioCotizacion() {
 
   const { datos, changeDatos, handleSubmit, results, resultsEditar } = useFormulario();
 
+
   return (
     <>
       {
         (results.isLoading || resultsEditar.isLoading ) && <Alerta alerta={{msg: 'cargando...'}} />
       }
-      <form onSubmit={handleSubmit} className='h-5/6 overflow-x-hidden scrollbar'>
+      <form 
+        onSubmit={handleSubmit}
+        className='h-5/6 overflow-x-hidden scrollbar'>
         <div className='grid md:grid-cols-2 gap-3'>
 
           <div className=''>

@@ -19,7 +19,7 @@ export const authApiSlice = createApi({
       })
     }),
     autenticacionByToken: builder.query({
-      query: (token) => '/usuarios/perfil'
+      query: () => '/usuarios/perfil'
     })
   })
 })

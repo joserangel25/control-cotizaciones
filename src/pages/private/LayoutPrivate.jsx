@@ -1,9 +1,13 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { useLocation } from "react-router";
 import ButtonAdd from "../../components/ButtonAdd";
 import Header from "../../components/Header";
 import Modal from "../../components/modal/Modal";
 import VerticalMenu from "../../components/verticalMenu/VerticalMenu";
+
+//MUI
+import NewAlerta from '../../components/alerta/NewAlerta';
+// import { useAlerta } from '../../hooks/useAlerta';
 
 
 export default function LayoutPrivate({ Outlet }) {
@@ -35,7 +39,8 @@ export default function LayoutPrivate({ Outlet }) {
     ListenerShowMenu()
     showOutlet()
   }, [pathname])
-
+  
+  
   return (
     <>
       <Header showMenu={showVerticalMenu} />
@@ -43,7 +48,7 @@ export default function LayoutPrivate({ Outlet }) {
       <main className="flex flex-col md:flex-row">
  
         <div 
-          className=" hidden md:w-1/4 md:block shadow-lg shadow-stone-200/50 px-5 py-10 md:min-w-[252px] bg-sky-800" 
+          className="hidden md:w-1/4 md:block shadow-lg shadow-stone-200/50 px-5 py-10 md:min-w-[252px] bg-sky-800" 
           style={{height: 'calc(100vh - 87px)'}}
           ref={menuRef}
         >
@@ -59,7 +64,10 @@ export default function LayoutPrivate({ Outlet }) {
           { !pathname.includes('nueva') && <ButtonAdd /> }
         </div>
 
-        </main>
+        {/* TODO: Por hacer que se muestre esta alerta de MUI */}
+        <NewAlerta />
+        
+      </main>
       <Modal />
     </>
   )
