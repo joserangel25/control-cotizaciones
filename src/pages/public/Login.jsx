@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
-// import { } from '@reduxjs/toolkit/query'
-// import { invalidateQueries } from '@reduxjs/toolkit/query';
-// import { useNavigate, Link } from "react-router"
 import { useOnLoginMutation } from "../../store/api/authApiSlice"
 import { login } from "../../store/slices/authSlice"
-import { Link, useNavigate } from "react-router-dom"
+import { setModal } from "../../store/slices/modalSlice"
 
 export default function Login() {
 
@@ -21,16 +19,20 @@ export default function Login() {
     if(results.status === 'fulfilled'){
       dispatch( login( results.data ))
       navigate('/dashboard/avisos')
+      dispatch( setModal({isOpen: false, content: '', message: ''}) )
+
       return
     }
 
     if(results.isError){
       setError({ msg: results.error.data.msg, error: true })
+      dispatch( setModal({isOpen: false, content: '', message: ''}) )
 
       setTimeout(() => {
         setError({})
       }, 2000);
     }  
+
   }, [results])
   
 
@@ -41,7 +43,11 @@ export default function Login() {
       setError({ msg: 'todos los campos son obligatorios', error: true })
       return
     }
-    // invalidateQueries('Cotizaciones')
+    dispatch( setModal({
+      isOpen: true,
+      content: 'LOADING',
+      message:  'Iniciando sesión. Un momento por favor...'
+     }) )
     await handleLogin({email, password}).unwrap();
     setEmail('')
     setPassword('')

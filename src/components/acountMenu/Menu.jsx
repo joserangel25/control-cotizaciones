@@ -19,14 +19,18 @@ export default function MenuOptions({ open, handleClose, anchorEl }) {
 
   const handleCerrarSesion = () => {
     handleClose()
-    dispatch(setModal('LOADING'))
+    dispatch(setModal({
+      isOpen: true,
+      content: 'LOADING',
+      message: 'Cerrando la sesión. Un momento por favor...'
+    }))
     //Con el siguiente dispatch invalidamos la query para la próxima consulta. Con el inicio de sesión
     //se debe volver a hacer la consulta sí o sí eliminando la caché para evitar error de información
     dispatch(cotizacionesApi.util.resetApiState())
 
     setTimeout(() => {
       dispatch(logoutAction())
-      dispatch(setModal(''))
+      dispatch(setModal({isOpen: false, content: '', message: ''}))
 
       navigate('/')
     }, 1500)
