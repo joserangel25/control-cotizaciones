@@ -4,6 +4,16 @@ import { useDispatch } from "react-redux"
 import { useOnLoginMutation } from "../../store/api/authApiSlice"
 import { login } from "../../store/slices/authSlice"
 import { setModal } from "../../store/slices/modalSlice"
+import TextField from '@mui/material/TextField'
+import FormControl from '@mui/material/FormControl'
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 export default function Login() {
 
@@ -13,6 +23,7 @@ export default function Login() {
 
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+  const [ showPassword, setShowPassword ] = useState(false)
   const [ error, setError ] = useState({})
 
   useEffect(() => {
@@ -35,6 +46,10 @@ export default function Login() {
 
   }, [results])
   
+  const handleClickShowPassword = () => setShowPassword(!showPassword)
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   const handleSubmit  = async (e) => {
     e.preventDefault()
@@ -56,60 +71,73 @@ export default function Login() {
   const { msg } = error
 
   return (
-    <div className='w-full md:w-1/2 max-w-[500px]'>
+    <div className='mx-auto max-w-[500px]'>
       
     <form
       onSubmit={handleSubmit} 
       className='p-5 '
     >
+      <h3 className='text-4xl font-black text-sky-800 text-center'>Inicia Sesión</h3>
+      <h2 className='text-3xl font-black text-sky-600 text-center mb-5'>y controla tu negocio!</h2>
       {
         msg && <p className='p-2 uppercase font-bold text-sm bg-red-700 text-white text-center mb-3 rounded-md'>{error.msg}</p>
       }
-      <div className='w-full mb-3 flex flex-col'>
-        <label 
-          htmlFor="email"
-          className='text-sm font-bold tex-gray-700 mb-1 text-white'
+
+      {/* Email password */}
+      <TextField
+        id="outlined-password-input"
+        label="Email"
+        type="email"
+        fullWidth
+        name='email'
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      /> 
+      
+      {/* /Password Input */}
+      <FormControl variant="outlined" fullWidth margin="normal">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+            name='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </FormControl>
+
+        <Button 
+          type='submit'
+          autoFocus 
+          sx={{padding: '12px', marginTop: 1}}
+          variant="contained"
+          margin='normal'
+          size="large"
+          fullWidth
         >
-          Correo
-        </label>
-        <input 
-          type="email" 
-          name="email" 
-          id="email" 
-          placeholder='correo@correo.com'
-          className='outline-none rounded-md p-2'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)} 
-        />
-      </div>
+          Iniciar sesión
+        </Button>
 
-      <div className='w-full mb-3 flex flex-col'>
-        <label 
-          htmlFor="password"
-          className='text-sm font-bold tex-gray-700 mb-1 text-white'
+        <Link 
+          to='/'
+          className="mt-5 block text-center md:text-end text-sm hover:text-sky-700 transition-colors"
         >
-          Contraseña
-        </label>
-        <input 
-          type="password" 
-          name="password" 
-          id="password" 
-          className='outline-none rounded-md p-2' 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} 
-        />
-      </div>
+          Recuperar contraseña
+        </Link>
 
-      <input 
-        type='submit'
-        value='Iniciar sesión'
-        className='w-full p-2 bg-amber-500 text-gray-700 uppercase font-bold rounded-md shadow-md cursor-pointer'
-        
-      />
-
-      <div className="mt-5 text-end text-white text-sm">
-        <Link to='/'>Recuperar contraseña</Link>
-      </div>
     </form>
     </div>
 
