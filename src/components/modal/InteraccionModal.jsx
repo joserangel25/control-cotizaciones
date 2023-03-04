@@ -36,7 +36,6 @@ export default function InteraccionModal({handleClose}) {
 
     try {
       const res = await  agregarInteraccion({descripcion, fecha, cotizacion: idCotizacion}).unwrap()
-      console.log(res)
       setDisable(false)
       handleClose()
       dispatch( setAlerta({msg: 'Se guardó correctamente!'}) )

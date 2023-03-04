@@ -114,13 +114,13 @@ export default function FormularioCotizacion() {
           }
 
           <div className=''>
-            <label htmlFor='referido' className='font-bold text-gray-500 mb-2'>Referido:</label>
+            <label htmlFor='referido' className='font-bold text-gray-500 mb-2 '>Referido:</label>
             <input 
               id='referido'
               name='referido'
               value={datos.referido}
               onChange={changeDatos}
-              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 '
+              className='w-full p-2 border-2  mt-1 rounded-md focus:outline-none focus:border-indigo-500 placeholder:text-gray-400 uppercase'
               placeholder="Ej. Jose Rangel"
             />
           </div>
@@ -140,7 +140,7 @@ export default function FormularioCotizacion() {
         <input 
           type='submit'
           className='w-full p-3 mt-6 bg-sky-800 rounded-md text-white uppercase font-bold mr-1 hover:bg-sky-700 transition-colors cursor-pointer'
-          value={datos._id ? 'Editar' : 'Agregar'}
+          value={datos._id ? 'Guardar cambios' : 'Agregar cotizacion'}
         />
       </form>
     </>

@@ -3,24 +3,23 @@ import Alerta from '../../components/alerta/Alerta';
 
 import Cotizacion from '../../components/listadoCotizaciones/Cotizacion'
 import ListadoCotizaciones from '../../components/listadoCotizaciones/ListadoCotizaciones'
+import { useTotal } from '../../hooks/useTotal';
 
 export default function Cotizaciones() {
-  const { cotizaciones, alerta } = useSelector(state => state.cotizaciones);
+  const { alerta } = useSelector(state => state.cotizaciones);
+  const { totalOfertas, loading } = useTotal('Cotizado');
 
   const { msg } = alerta;
   return (
     <>
       <h2 className='font-black text-gray-700 text-4xl mb-5'>Cotizaciones</h2>
-      { !cotizaciones.length && <Alerta alerta={{msg: 'No hay cotizaciones agregadas aún.'}} /> }
+      { (!totalOfertas.length && !loading ) && <Alerta alerta={{msg: 'No hay cotizaciones agregadas aún.'}} /> }
       {
         msg && <Alerta alerta={alerta} />
       }
       <ListadoCotizaciones>
         {
-          cotizaciones.map(cotizacion => {
-            if(cotizacion.estado !== 'Cotizado'){
-              return
-            }
+          totalOfertas.map(cotizacion => {
             return (<Cotizacion key={cotizacion._id} cotizacion={cotizacion} />)
           })
         }
