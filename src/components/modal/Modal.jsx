@@ -1,9 +1,8 @@
 import  { useSelector, useDispatch} from 'react-redux'
-import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import { setModal } from '../../store/slices/modalSlice';
 import InteraccionModal from './InteraccionModal';
-import LoadingModal from './loadingModal';
+import LoadingModal from './LoadingModal';
 
 export default function Modal() {
 
