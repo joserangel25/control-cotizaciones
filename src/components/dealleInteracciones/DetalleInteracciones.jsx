@@ -6,7 +6,7 @@ export default function DetalleInteracciones({interacciones}) {
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
-    dispatch( setModal('INTERACCION') )
+    dispatch( setModal({isOpen: true, content: 'INTERACCION', message: ''}) )
   }
 
   return (

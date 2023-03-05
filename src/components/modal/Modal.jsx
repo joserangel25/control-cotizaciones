@@ -10,7 +10,7 @@ export default function Modal() {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch( setModal() )
+    dispatch( setModal({isOpen: false, content: '', message: ''}) )
   };
 
   return (
@@ -20,7 +20,6 @@ export default function Modal() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        // fullWidth
       >
         {
           (content === 'INTERACCION') && <InteraccionModal handleClose={handleClose} />
