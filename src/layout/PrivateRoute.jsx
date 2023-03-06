@@ -49,7 +49,7 @@ export default function PrivateRoute() {
   return (
     <>
       {
-        auth._id && <LayoutPrivate Outlet={Outlet} />
+        auth._id && <LayoutPrivate Outlet={Outlet} user={auth} />
       }
     </>
   )

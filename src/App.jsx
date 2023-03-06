@@ -9,6 +9,7 @@ import Cotizaciones from './pages/private/Cotizaciones';
 import DetalleCotizacion from './pages/private/DetalleCotizacion';
 import Emisiones from './pages/private/Emisiones';
 import NuevaCotizacion from './pages/private/NuevaCotizacion';
+import Agencias from './pages/admin/Agencias';
 
 
 function App() {
@@ -52,8 +53,21 @@ function App() {
           <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
           <Route path='ver-cotizacion/:id' element={<DetalleCotizacion />} />
           <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
+          <Route path='agencias' element={<Agencias />} />
         </Route>
-      
+      {/* <Route path='/dashboard' element={<PrivateRoute />}>
+          <Route path='cliente' element={<PrivateRoute />}>
+            <Route path='avisos' element={<Avisos />} />
+            <Route path='cotizaciones' element={<Cotizaciones />} />
+            <Route path='emisiones' element={<Emisiones />} />
+            <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
+            <Route path='ver-cotizacion/:id' element={<DetalleCotizacion />} />
+            <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
+          </Route>
+          <Route path='admin' element={<Agencias />}>
+            <Route path='agencias' element={<Agencias />} />
+          </Route>
+        </Route> */}
       </Routes>  
     </BrowserRouter>
     </>
