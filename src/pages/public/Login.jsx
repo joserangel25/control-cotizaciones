@@ -29,7 +29,7 @@ export default function Login() {
   useEffect(() => {
     if(results.status === 'fulfilled'){
       dispatch( login( results.data ))
-      navigate('/dashboard/avisos')
+      navigate('/dashboard')
       dispatch( setModal({isOpen: false, content: '', message: ''}) )
 
       return

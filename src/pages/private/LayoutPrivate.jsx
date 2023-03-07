@@ -4,13 +4,14 @@ import ButtonAdd from "../../components/ButtonAdd";
 import Header from "../../components/Header";
 import Modal from "../../components/modal/Modal";
 import VerticalMenu from "../../components/verticalMenu/VerticalMenu";
+import { Outlet } from 'react-router';
 
 //MUI
 import NewAlerta from '../../components/alerta/NewAlerta';
 // import { useAlerta } from '../../hooks/useAlerta';
 
 
-export default function LayoutPrivate({ Outlet }) {
+export default function LayoutPrivate({ user }) {
   const menuRef = useRef()
   const outletRef = useRef()
   const { pathname } = useLocation()
@@ -35,14 +36,16 @@ export default function LayoutPrivate({ Outlet }) {
   } 
   
   //escuchamos los cambios del pathname para ver si hay que ocultar el menu vertical
-  useEffect(() => {
-    ListenerShowMenu()
-    showOutlet()
-  }, [pathname])
+  // useEffect(() => {
+  //   ListenerShowMenu()
+  //   showOutlet()
+  // }, [pathname])
   
   
   return (
     <>
+    {/* <p>Jose</p> */}
+    {/* <Outlet /> */}
       <Header showMenu={showVerticalMenu} />
 
       <main className="flex flex-col md:flex-row">
@@ -64,7 +67,6 @@ export default function LayoutPrivate({ Outlet }) {
           { !pathname.includes('nueva') && <ButtonAdd /> }
         </div>
 
-        {/* TODO: Por hacer que se muestre esta alerta de MUI */}
         <NewAlerta />
         
       </main>

@@ -10,6 +10,8 @@ import DetalleCotizacion from './pages/private/DetalleCotizacion';
 import Emisiones from './pages/private/Emisiones';
 import NuevaCotizacion from './pages/private/NuevaCotizacion';
 import Agencias from './pages/admin/Agencias';
+import LayoutPrivate from './pages/private/LayoutPrivate';
+import Usuarios from './pages/admin/Usuarios';
 
 
 function App() {
@@ -46,7 +48,7 @@ function App() {
           <Route index element={<Login />} />
         </Route>
 
-        <Route path='/dashboard' element={<PrivateRoute />}>
+        {/* <Route path='/dashboard' element={<PrivateRoute />}>
           <Route path='avisos' element={<Avisos />} />
           <Route path='cotizaciones' element={<Cotizaciones />} />
           <Route path='emisiones' element={<Emisiones />} />
@@ -54,20 +56,21 @@ function App() {
           <Route path='ver-cotizacion/:id' element={<DetalleCotizacion />} />
           <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
           <Route path='agencias' element={<Agencias />} />
-        </Route>
-      {/* <Route path='/dashboard' element={<PrivateRoute />}>
-          <Route path='cliente' element={<PrivateRoute />}>
-            <Route path='avisos' element={<Avisos />} />
+        </Route> */}
+      <Route path='/dashboard' element={<PrivateRoute />}>
+          <Route path='cliente' element={<LayoutPrivate />}>
+            <Route index path='avisos' element={<Avisos />} />
             <Route path='cotizaciones' element={<Cotizaciones />} />
             <Route path='emisiones' element={<Emisiones />} />
             <Route path='nueva-cotizacion' element={<NuevaCotizacion />} />
             <Route path='ver-cotizacion/:id' element={<DetalleCotizacion />} />
             <Route path='editar-cotizacion/:id' element={<NuevaCotizacion />} />
           </Route>
-          <Route path='admin' element={<Agencias />}>
+          <Route path='admin' element={<LayoutPrivate />}>
             <Route path='agencias' element={<Agencias />} />
+            <Route path='usuarios' element={<Usuarios />} />
           </Route>
-        </Route> */}
+        </Route>
       </Routes>  
     </BrowserRouter>
     </>
