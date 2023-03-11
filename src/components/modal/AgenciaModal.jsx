@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useAlerta } from "../../hooks/useAlerta"
 
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import CircularProgress from '@mui/material/CircularProgress';
-
 
 //Redux
 import { setModal } from '../../store/slices/modalSlice'
@@ -13,6 +13,7 @@ import { useAgregarAgenciaApiMutation } from "../../store/api/adminApi"
 import { setAlerta } from "../../store/slices/cotizacionesSlice";
 
 export default function AgenciaModal({handleClose}) {
+  const { restablecerAlerta, alertaExito, alertaError } = useAlerta()
 
   const [nombre, setNombre] = useState('')
   const [ identificacion, setIdentificacion ] = useState(0)
@@ -23,14 +24,14 @@ export default function AgenciaModal({handleClose}) {
     e.preventDefault();
 
     if(nombre === '' || identificacion === 0){
-      alert('Todos los campos son obligatorios')
+      alertaError('Todos los campos son obligatorios')
       return
     };
 
    try {
     const res = await agregarAgencia({nombre, identificacion}).unwrap()
     if(res._id){
-      dispatch( setAlerta({ isOpen: true, message: 'Se creó exitosamente la agencia!', type: 'success' }) )
+      alertaExito('Se creó exitosamente la agencia!')
       dispatch( setModal({ isOpen: false, content: '', message: '' }) )
     }
     
@@ -39,7 +40,7 @@ export default function AgenciaModal({handleClose}) {
    }
 
    setTimeout(() => {
-    dispatch( setAlerta({ isOpen: false, message: '', type: 'info' }) )
+    restablecerAlerta()
    }, 1500);
   }
 
