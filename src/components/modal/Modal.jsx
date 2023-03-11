@@ -3,6 +3,7 @@ import Dialog from '@mui/material/Dialog';
 import { setModal } from '../../store/slices/modalSlice';
 import InteraccionModal from './InteraccionModal';
 import LoadingModal from './LoadingModal';
+import AgenciaModal from './AgenciaModal';
 
 export default function Modal() {
 
@@ -26,7 +27,11 @@ export default function Modal() {
         }
 
         {
-          (content === 'LOADING') && <LoadingModal message={message} />
+          (content === 'LOADING') && <LoadingModal message={message} handleClose={handleClose} />
+        }
+
+        {
+          (content === 'ADD-AGENCY') && <AgenciaModal message={message} handleClose={handleClose} />
         }
       </Dialog>
     </div>

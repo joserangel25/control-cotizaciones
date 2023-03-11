@@ -1,7 +1,10 @@
 import React from 'react'
+import OutletWrapper from '../../components/outletWrapper/OutletWrapper'
 
 export default function Usuarios() {
   return (
-    <div>Listado de todos los Usuarios actuales</div>
+    <OutletWrapper title='Usuarios'>
+      <p>Listado de todos los Usuarios actuales</p>
+    </OutletWrapper>
   )
 }

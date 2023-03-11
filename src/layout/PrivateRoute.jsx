@@ -23,8 +23,10 @@ export default function PrivateRoute() {
   useEffect(() => {
     if(auth?.rol === 'admin'){
       navigate('admin')
-    } else {
+    } else if(auth?.rol === 'colaborador'){
       navigate('cliente')
+    } else {
+      navigate('/')
     }
   }, [auth])
   // useEffect(() => {

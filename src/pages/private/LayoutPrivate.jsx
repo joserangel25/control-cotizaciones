@@ -44,8 +44,6 @@ export default function LayoutPrivate({ user }) {
   
   return (
     <>
-    {/* <p>Jose</p> */}
-    {/* <Outlet /> */}
       <Header showMenu={showVerticalMenu} />
 
       <main className="flex flex-col md:flex-row">
@@ -64,7 +62,7 @@ export default function LayoutPrivate({ user }) {
           style={{height: 'calc(100vh - 87px)'}} 
         >
           <Outlet />
-          { !pathname.includes('nueva') && <ButtonAdd /> }
+          {/* { !pathname.includes('nueva') && <ButtonAdd /> } */}
         </div>
 
         <NewAlerta />
