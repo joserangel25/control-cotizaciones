@@ -9,12 +9,14 @@ import { adminApi } from './api/adminApi'
 import { authSlice } from './slices/authSlice'
 import { cotizacionesSlice } from './slices/cotizacionesSlice'
 import { modalSlice } from './slices/modalSlice'
+import { adminSlice } from './slices/adminSlice'
 
 export const store = configureStore({
   reducer: {
     cotizaciones: cotizacionesSlice.reducer,
     auth: authSlice.reducer,
     modal: modalSlice.reducer,
+    admin: adminSlice.reducer,
     [authApiSlice.reducerPath]: authApiSlice.reducer,
     [cotizacionesApi.reducerPath]: cotizacionesApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer

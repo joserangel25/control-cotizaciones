@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { setModal } from '../../store/slices/modalSlice'
 //RTK Query
 import { useAgregarAgenciaApiMutation } from "../../store/api/adminApi"
+import { setAlerta } from "../../store/slices/cotizacionesSlice";
 
 export default function AgenciaModal({handleClose}) {
 
@@ -26,8 +27,20 @@ export default function AgenciaModal({handleClose}) {
       return
     };
 
-    await agregarAgencia({nombre, identificacion}).unwrap()
-    dispatch( setModal({ isOpen: false, content: '', message: '' }) )
+   try {
+    const res = await agregarAgencia({nombre, identificacion}).unwrap()
+    if(res._id){
+      dispatch( setAlerta({ isOpen: true, message: 'Se creó exitosamente la agencia!', type: 'success' }) )
+      dispatch( setModal({ isOpen: false, content: '', message: '' }) )
+    }
+    
+   } catch (error) {
+    console.log(error)
+   }
+
+   setTimeout(() => {
+    dispatch( setAlerta({ isOpen: false, message: '', type: 'info' }) )
+   }, 1500);
   }
 
   return (

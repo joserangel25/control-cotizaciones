@@ -32,7 +32,7 @@ export const cotizacionesApi = createApi({
       query: (newCoti) => ({
         url: `/cotizaciones/${newCoti.id}`,
         method: 'POST',
-        body: newCoti
+        body: newCoti,
       }),
       invalidatesTags: ['Cotizaciones']
     }),

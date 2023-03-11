@@ -23,8 +23,17 @@ export const adminApi = createApi({
         body: agencia
       }),
       invalidatesTags: ['Agencias']
+    }),
+    eliminarAgenciaApi: builder.mutation({
+      query: (id) => ({
+        url: `/agencias/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Agencias']
     })
   })
 });
 
-export const  { useGetAgenciasApiQuery, useAgregarAgenciaApiMutation } = adminApi
+export const  { useGetAgenciasApiQuery, 
+                useAgregarAgenciaApiMutation,
+                useEliminarAgenciaApiMutation } = adminApi

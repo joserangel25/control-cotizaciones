@@ -1,9 +1,13 @@
-import  { useSelector, useDispatch} from 'react-redux'
+
+import  { useSelector, useDispatch } from 'react-redux'
 import Dialog from '@mui/material/Dialog';
+
 import { setModal } from '../../store/slices/modalSlice';
 import InteraccionModal from './InteraccionModal';
 import LoadingModal from './LoadingModal';
 import AgenciaModal from './AgenciaModal';
+import EliminarAgenciaModal from './EliminarAgenciaModal.jsx'
+import { seleccionarAgencia } from '../../store/slices/adminSlice';
 
 export default function Modal() {
 
@@ -11,8 +15,11 @@ export default function Modal() {
   const dispatch = useDispatch();
 
   const handleClose = () => {
+    dispatch( seleccionarAgencia({}) )
     dispatch( setModal({isOpen: false, content: '', message: ''}) )
   };
+
+
 
   return (
     <div>
@@ -21,6 +28,8 @@ export default function Modal() {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
+ 
+
       >
         {
           (content === 'INTERACCION') && <InteraccionModal handleClose={handleClose} />
@@ -32,6 +41,9 @@ export default function Modal() {
 
         {
           (content === 'ADD-AGENCY') && <AgenciaModal message={message} handleClose={handleClose} />
+        }
+        {
+          (content === 'DELETE-AGENCY') && <EliminarAgenciaModal message={message} handleClose={handleClose} />
         }
       </Dialog>
     </div>

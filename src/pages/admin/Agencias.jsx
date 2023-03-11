@@ -37,7 +37,7 @@ export default function Agencias() {
             </li>
           {
             agencias.map(agencia => (
-              <Agencia key={agencia._id} nombre={agencia.nombre} identificacion={agencia.identificacion} />   
+              <Agencia key={agencia._id} agencia={agencia} />   
             ))
           }
           </ul>      
