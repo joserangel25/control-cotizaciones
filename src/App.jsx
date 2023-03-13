@@ -12,6 +12,7 @@ import NuevaCotizacion from './pages/private/NuevaCotizacion';
 import Agencias from './pages/admin/Agencias';
 import LayoutPrivate from './pages/private/LayoutPrivate';
 import Usuarios from './pages/admin/Usuarios';
+import DetalleAgencia from './pages/admin/DetalleAgencia';
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
           </Route>
           <Route path='admin' element={<LayoutPrivate />}>
             <Route path='agencias' element={<Agencias />} />
+            <Route path='agencias/:id' element={<DetalleAgencia />} />
             <Route path='usuarios' element={<Usuarios />} />
           </Route>
         </Route>

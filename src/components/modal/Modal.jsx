@@ -2,12 +2,16 @@
 import  { useSelector, useDispatch } from 'react-redux'
 import Dialog from '@mui/material/Dialog';
 
-import { setModal } from '../../store/slices/modalSlice';
 import InteraccionModal from './InteraccionModal';
 import LoadingModal from './LoadingModal';
 import AgenciaModal from './AgenciaModal';
 import EliminarAgenciaModal from './EliminarAgenciaModal.jsx'
+import UsuarioAgenciaModal from './UsuarioAgenciaModal';
+import EliminarUsuarioModal from './EliminarUsuario';
+
+//RTK
 import { seleccionarAgencia } from '../../store/slices/adminSlice';
+import { setModal } from '../../store/slices/modalSlice';
 
 export default function Modal() {
 
@@ -44,6 +48,12 @@ export default function Modal() {
         }
         {
           (content === 'DELETE-AGENCY') && <EliminarAgenciaModal message={message} handleClose={handleClose} />
+        }
+        {
+          (content === 'ADD-USUARIO-AGENCY') && <UsuarioAgenciaModal message={message} handleClose={handleClose} />
+        }
+        {
+          (content === 'DELETE-USUARIO-AGENCY') && <EliminarUsuarioModal message={message} handleClose={handleClose} />
         }
       </Dialog>
     </div>

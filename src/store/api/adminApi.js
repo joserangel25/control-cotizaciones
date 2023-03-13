@@ -10,11 +10,15 @@ export const adminApi = createApi({
       return headers;
   },
   }),
-  tagTypes: ['Agencias'],
+  tagTypes: ['Agencias', 'Agencia'],
   endpoints: (builder) => ({
     getAgenciasApi: builder.query({
       query: () => '/agencias',
       providesTags: ['Agencias']
+    }),
+    getAgenciaById: builder.query({
+      query: (id) => `/agencias/${id}`,
+      providesTags: ['Agencia']
     }),
     agregarAgenciaApi: builder.mutation({
       query: (agencia) =>({
@@ -30,10 +34,37 @@ export const adminApi = createApi({
         method: 'DELETE'
       }),
       invalidatesTags: ['Agencias']
+    }),
+    buscarUsuarioApi: builder.mutation({
+      query: (email) => ({
+        url: '/usuarios/buscar-usuario',
+        method: 'POST',
+        body: email
+      })
+    }),
+    añadirUsuarioAAgenciaApi: builder.mutation({
+      query: (datos) => ({
+        url: `/agencias/${datos.idAgencia}/colaborador`,
+        method: 'POST',
+        body: datos
+      }),
+      invalidatesTags: ['Agencia']
+    }),
+    eliminarUsuarioAAgenciaApi: builder.mutation({
+      query: (datos) => ({
+        url: `/agencias/${datos.idAgencia}/colaborador`,
+        method: 'PATCH',
+        body: datos
+      }),
+      invalidatesTags: ['Agencia']
     })
   })
 });
 
-export const  { useGetAgenciasApiQuery, 
+export const  { useGetAgenciasApiQuery,
+                useGetAgenciaByIdQuery, 
                 useAgregarAgenciaApiMutation,
-                useEliminarAgenciaApiMutation } = adminApi
+                useEliminarAgenciaApiMutation,
+                useBuscarUsuarioApiMutation,
+                useAñadirUsuarioAAgenciaApiMutation,
+                useEliminarUsuarioAAgenciaApiMutation } = adminApi
