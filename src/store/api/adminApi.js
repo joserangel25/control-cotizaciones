@@ -35,6 +35,14 @@ export const adminApi = createApi({
       }),
       invalidatesTags: ['Agencias']
     }),
+    editarAgenciaApi: builder.mutation({
+      query: (datos) => ({
+        url: `/agencias/${datos._id}`,
+        method: 'POST',
+        body: datos
+      }),
+      invalidatesTags: ['Agencias']
+    }),
     buscarUsuarioApi: builder.mutation({
       query: (email) => ({
         url: '/usuarios/buscar-usuario',
@@ -65,6 +73,7 @@ export const  { useGetAgenciasApiQuery,
                 useGetAgenciaByIdQuery, 
                 useAgregarAgenciaApiMutation,
                 useEliminarAgenciaApiMutation,
+                useEditarAgenciaApiMutation,
                 useBuscarUsuarioApiMutation,
                 useAñadirUsuarioAAgenciaApiMutation,
                 useEliminarUsuarioAAgenciaApiMutation } = adminApi

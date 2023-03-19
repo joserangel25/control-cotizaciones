@@ -5,7 +5,7 @@ export const useModal = () => {
   
   const dispatch = useDispatch();
 
-  const abrirModal = (content, message) => {
+  const abrirModal = (content, message = '') => {
     dispatch( setModal({ isOpen: true, content, message }) )
   }
 

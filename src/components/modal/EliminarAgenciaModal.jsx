@@ -1,21 +1,19 @@
-
-import { useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import CircularProgress from '@mui/material/CircularProgress';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useAlerta } from '../../hooks/useAlerta';
+import { useAgencia } from '../../hooks/useAgencia';
 
 //RTK Query
 import { useEliminarAgenciaApiMutation } from '../../store/api/adminApi';
 
 
-export default function AliminarAgenciaModal({message, handleClose}) {
+export default function EliminarAgenciaModal({message, handleClose}) {
 
-  const  { alertaExito, restablecerAlerta } = useAlerta()
-
-  const { agencia } = useSelector(state => state.admin);
+  const { agencia } = useAgencia()
+  const { alertaExito, restablecerAlerta } = useAlerta()
 
   const [ eliminarAgencia, resultsEliminar ] = useEliminarAgenciaApiMutation()
 
@@ -49,7 +47,7 @@ export default function AliminarAgenciaModal({message, handleClose}) {
             color='error'
             onClick={handleClose}
           >
-            Disagree
+            Cancelar
           </Button>
           <Button
             variant='contained' 

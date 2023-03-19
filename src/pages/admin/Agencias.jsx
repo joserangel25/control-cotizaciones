@@ -1,6 +1,4 @@
-//Redux
-import { useDispatch } from 'react-redux';
-import { setModal } from '../../store/slices/modalSlice';
+import { useModal } from '../../hooks/useModal';
 
 //API RTK Query
 import { useGetAgenciasApiQuery } from '../../store/api/adminApi'
@@ -15,11 +13,11 @@ import Agencia from '../../components/agencias/Agencia';
 
 export default function Agencias() {
   const { data: agencias, isError, isLoading, isSuccess, status } = useGetAgenciasApiQuery();
-  const dispatch = useDispatch()
+  const { abrirModal } = useModal()
 
 
   const handleTitleButton = () => {
-    dispatch( setModal({ isOpen: true, message: '', content: 'ADD-AGENCY' }) )
+    abrirModal('AGENCY')
   }
   
   return (

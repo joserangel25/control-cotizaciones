@@ -4,6 +4,7 @@ export const adminSlice = createSlice({
   name: 'adminSlice',
   initialState: {
     agencia: {},
+    cotizacionesAgencia: [],
     colaborador: {},
     loading: false
   },
@@ -13,8 +14,16 @@ export const adminSlice = createSlice({
     },
     seleccionarColaborador: (state, action) => {
       state.colaborador = action.payload
+    },
+    agregarCotizaciones: (state, action) => {
+      state.cotizacionesAgencia.push(action.payload)
+    },
+    eliminarCotizaciones: (state, action) => {
+  
+      const newCotizacines = state.cotizacionesAgencia.filter(cotizaciones => cotizaciones.creador.toString() !== action.payload.toString());
+      state.cotizacionesAgencia = newCotizacines;
     }
   }
 });
 
-export const { seleccionarAgencia, seleccionarColaborador } = adminSlice.actions
+export const { seleccionarAgencia, seleccionarColaborador, agregarCotizaciones } = adminSlice.actions

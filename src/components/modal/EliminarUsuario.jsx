@@ -16,22 +16,22 @@ export default function AliminarAgenciaModal({message, handleClose}) {
   const { id } = useParams()
   const { colaborador } = useSelector(state => state.admin)
 
-  const  { alertaExito, alertaError, restablecerAlerta } = useAlerta()
+
+  const { alertaExito, alertaError, restablecerAlerta } = useAlerta()
   const [ eliminarColaborador, { data, isLoading, isError } ] = useEliminarUsuarioAAgenciaApiMutation()
 
   const handleClickEliminarUsuario = async () => {
     try {
-      console.log({idAgencia: id, id: colaborador._id})
       await eliminarColaborador({idAgencia: id, id: colaborador._id}).unwrap()
       handleClose()
       alertaExito('Se eleminó el colaborador correctamente!')
-      
     } catch (error) {
       console.log(error)
       handleClose()
       alertaError(error.data.message)
     } 
   }
+  
   return (
     <>
         <DialogTitle>

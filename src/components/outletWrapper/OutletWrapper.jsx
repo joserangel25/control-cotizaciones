@@ -3,7 +3,7 @@ export default function OutletWrapper({title, children, onClickTitleButton, titl
     <div className="grid  h-full" style={ {gridTemplateRows: 'repeat(11, minmax(0, 1fr))'} }>
       <div className="row-start-1 row-end-2">
         <div className="flex justify-between box-border">
-          <h2 className='font-black text-gray-700 text-4xl'>{title}</h2>
+          <h2 className='font-black text-sky-700 uppercase text-4xl'>{title}</h2>
           {
             titleButton && 
             <button onClick={onClickTitleButton} className='hover:text-sky-800'>

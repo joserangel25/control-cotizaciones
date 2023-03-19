@@ -1,24 +1,35 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useState, useEffect } from "react"
 import { useAlerta } from "../../hooks/useAlerta"
+import { useModal } from "../../hooks/useModal"
+import { useAgencia } from "../../hooks/useAgencia"
 
 import TextField from "@mui/material/TextField"
 import Button from "@mui/material/Button"
 import CircularProgress from '@mui/material/CircularProgress';
 
-//Redux
-import { setModal } from '../../store/slices/modalSlice'
 //RTK Query
-import { useAgregarAgenciaApiMutation } from "../../store/api/adminApi"
-import { setAlerta } from "../../store/slices/cotizacionesSlice";
+import { useAgregarAgenciaApiMutation, useEditarAgenciaApiMutation } from "../../store/api/adminApi"
+
 
 export default function AgenciaModal({handleClose}) {
-  const { restablecerAlerta, alertaExito, alertaError } = useAlerta()
 
-  const [nombre, setNombre] = useState('')
+  const { alertaExito, alertaError } = useAlerta()
+  const { agencia, escogerAgencia } = useAgencia()
+  const { cerrarModal } = useModal()
+
+  const [ nombre, setNombre] = useState('')
   const [ identificacion, setIdentificacion ] = useState(0)
-  const dispatch = useDispatch()
   const [ agregarAgencia, resultsNewAgencia ] = useAgregarAgenciaApiMutation()
+  const [ editarAgencia, { isLoading } ] = useEditarAgenciaApiMutation()
+
+  useEffect(() => {
+    if(agencia?._id){
+      setNombre(agencia.nombre)
+      setIdentificacion(agencia.identificacion)
+    }
+  }, [])
+
+  const { _id } = agencia;  
 
   const handleSubmitAgencia = async (e) => {
     e.preventDefault();
@@ -29,25 +40,28 @@ export default function AgenciaModal({handleClose}) {
     };
 
    try {
-    const res = await agregarAgencia({nombre, identificacion}).unwrap()
-    if(res._id){
+    if(_id){
+      await editarAgencia({_id, nombre, identificacion}).unwrap()
+      alertaExito('Se actualizó exitosamente la agencia!')
+
+    } else {
+      await agregarAgencia({nombre, identificacion}).unwrap()
       alertaExito('Se creó exitosamente la agencia!')
-      dispatch( setModal({ isOpen: false, content: '', message: '' }) )
     }
     
    } catch (error) {
+    alertaError('Se presentó un error, comuníquese con el administrador del servicio')
     console.log(error)
    }
 
-   setTimeout(() => {
-    restablecerAlerta()
-   }, 1500);
+   cerrarModal()
+   escogerAgencia({})
   }
 
   return (
     <div className="p-5 min-w[300px] max-w-[450px] flex flex-col gap-4">
       <div className="flex justify-between">
-        <p className="font-black text-2xl">Agregar Agencia</p>
+        <p className="font-black text-2xl text-gray-700">{_id ? 'Editar Agencia' : 'Agregar Agencia' }</p>
         <button onClick={handleClose} title='cerrar'>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hover:text-sky-700" title='cerrar' >
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -84,10 +98,12 @@ export default function AgenciaModal({handleClose}) {
           margin='normal'
           size="large"
           fullWidth
-          disabled={resultsNewAgencia.isLoading}
-          endIcon={resultsNewAgencia.isLoading && <CircularProgress size={24} />}
+          disabled={resultsNewAgencia.isLoading || isLoading }
+          endIcon={(resultsNewAgencia.isLoading || isLoading ) && <CircularProgress size={24} />}
         >
-          Agregar
+          {
+            _id ? 'Guardar cambios' : 'Agregar'
+          }
         </Button>
       </form>
     </div>

@@ -44,7 +44,7 @@ export default function Modal() {
         }
 
         {
-          (content === 'ADD-AGENCY') && <AgenciaModal message={message} handleClose={handleClose} />
+          (content === 'AGENCY') && <AgenciaModal message={message} handleClose={handleClose} />
         }
         {
           (content === 'DELETE-AGENCY') && <EliminarAgenciaModal message={message} handleClose={handleClose} />
