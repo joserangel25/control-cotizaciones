@@ -2,12 +2,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 
-
 import DetalleCliente from "../../components/dealleInteracciones/DetalleCliente"
 import DetalleInteracciones from "../../components/dealleInteracciones/DetalleInteracciones"
 import TitlePage from "../../components/TitlePage"
 import { formatearFecha, formatearPrima } from "../../helpers"
-import Alerta from '../../components/alerta/Alerta'
 
 import  { useGetCotizacionStoreQuery } from '../../store/api/cotizacionesApi'
 
@@ -34,9 +32,7 @@ export default function DetalleCotizacion() {
   
   return (
     <>
-    {
-      msg && <Alerta alerta={alerta} />
-    }
+    
       <TitlePage detalle={`${data?.cotizacion.cliente} - ${data?.cotizacion.placa}`} /> 
       <div className="h-5/6 overflow-x-hidden scrollbar">
 

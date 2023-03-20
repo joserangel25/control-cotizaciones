@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { useCrearInteraccionStoreMutation } from '../../store/api/cotizacionesApi';
-import { setAlerta } from '../../store/slices/cotizacionesSlice';
+
+import { useAlerta } from '../../hooks/useAlerta';
 
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
@@ -18,9 +18,9 @@ export default function InteraccionModal({handleClose}) {
   const [descripcion, setDescripcion] = useState('')
   const [fecha, setFecha] = useState('')
   const [error, setError] = useState(false)
-  const [disable, setDisable] = useState(false)
-  const dispatch = useDispatch()
+
   const [agregarInteraccion, result] = useCrearInteraccionStoreMutation()
+  const { alertaExito, alertaError } = useAlerta()
 
   const handleAgregar = async () => {
     if([descripcion, fecha].includes('')){
@@ -32,21 +32,15 @@ export default function InteraccionModal({handleClose}) {
       return
     }
 
-    setDisable(true)
-
     try {
-      const res = await  agregarInteraccion({descripcion, fecha, cotizacion: idCotizacion}).unwrap()
-      setDisable(false)
-      handleClose()
-      dispatch( setAlerta({msg: 'Se guardó correctamente!'}) )
+      await  agregarInteraccion({descripcion, fecha, cotizacion: idCotizacion}).unwrap()
+      alertaExito('Se agregó correctamente la interacción con el cliente!')
       
     } catch (error) {
       console.log(error)
+      alertaError('Se presentó un error. Comunícate con el administrador!')
     }
-
-    setTimeout(() => {
-      dispatch( setAlerta({}) )
-    }, 1500);
+    handleClose()
 
   }
 
@@ -66,7 +60,6 @@ export default function InteraccionModal({handleClose}) {
         label="Fecha Contacto"
         type="date"
         required
-        disabled={disable}
         InputLabelProps={{
           shrink: true,
         }}
@@ -86,7 +79,6 @@ export default function InteraccionModal({handleClose}) {
         fullWidth
         rows={4}
         required
-        disabled={disable}
         value={descripcion}
         onChange={(e) => setDescripcion(e.target.value)}
         error={error}
@@ -103,9 +95,9 @@ export default function InteraccionModal({handleClose}) {
         <Button 
           onClick={handleAgregar} 
           autoFocus 
-          disabled={disable}
+          disabled={result.isLoading}
           variant="contained"
-          endIcon={disable && <CircularProgress size={24} />}
+          endIcon={result.isLoading && <CircularProgress size={24} />}
         >
           Agregar
         </Button>
