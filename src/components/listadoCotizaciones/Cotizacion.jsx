@@ -12,12 +12,12 @@ export default function Cotizacion({ cotizacion }) {
 
   const handleClickEditar = () => {
     dispatch( obtenerCotizacion(cotizacion._id) )
-    navigate(`/dashboard/editar-cotizacion/${_id}`)
+    navigate(`/dashboard/cliente/editar-cotizacion/${_id}`)
   }
 
   const handleClickVerDetalles = () => {
     dispatch( obtenerCotizacion(cotizacion._id) )
-    navigate(`/dashboard/ver-cotizacion/${_id}`)
+    navigate(`/dashboard/cliente/ver-cotizacion/${_id}`)
   }
 
   return (

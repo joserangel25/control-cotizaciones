@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { useLocation } from "react-router";
 import ButtonAdd from "../../components/ButtonAdd";
 import Header from "../../components/Header";
@@ -35,11 +35,11 @@ export default function LayoutPrivate({ user }) {
     }
   } 
   
-  //escuchamos los cambios del pathname para ver si hay que ocultar el menu vertical
-  // useEffect(() => {
-  //   ListenerShowMenu()
-  //   showOutlet()
-  // }, [pathname])
+  // escuchamos los cambios del pathname para ver si hay que ocultar el menu vertical
+  useEffect(() => {
+    ListenerShowMenu()
+    showOutlet()
+  }, [pathname])
   
   
   return (
@@ -62,7 +62,7 @@ export default function LayoutPrivate({ user }) {
           style={{height: 'calc(100vh - 87px)'}} 
         >
           <Outlet />
-          {/* { !pathname.includes('nueva') && <ButtonAdd /> } */}
+          { (!pathname.includes('nueva')) && <ButtonAdd /> }
         </div>
 
         <NewAlerta />

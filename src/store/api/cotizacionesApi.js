@@ -5,7 +5,7 @@ export const cotizacionesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BACKEND_URL,
     prepareHeaders: (headers, { getState }) => {
-        const token = getState().auth.auth.token;
+        const token = getState().auth.auth.token || localStorage.getItem('token');
         headers.set('authorization', `Bearer ${token}`)
         return headers;
     },

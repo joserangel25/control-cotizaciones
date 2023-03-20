@@ -9,7 +9,7 @@ export default function TitlePage({title, detalle = null}) {
 
   const hadndleClick = () => {
     dispatch( quitarCotizacionObtenida() )
-    navigate('/dashboard/cotizaciones')
+    navigate(-1)
   }
   return (
     <div className='flex justify-between items-center mb-3 md:mb-0'>

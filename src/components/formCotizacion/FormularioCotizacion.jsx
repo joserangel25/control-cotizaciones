@@ -1,7 +1,10 @@
 import { ASEGURADORAS } from "../../constants"
 import { formatearFecha } from "../../helpers";
 import { useFormulario } from "../../hooks/useFormulario"
-import Alerta from "../alerta/Alerta";
+
+//MUI
+import Button from '@mui/material/Button';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function FormularioCotizacion() {
 
@@ -9,10 +12,6 @@ export default function FormularioCotizacion() {
 
 
   return (
-    <>
-      {
-        (results.isLoading || resultsEditar.isLoading ) && <Alerta alerta={{msg: 'cargando...'}} />
-      }
       <form 
         onSubmit={handleSubmit}
         className='h-5/6 overflow-x-hidden scrollbar'>
@@ -124,7 +123,7 @@ export default function FormularioCotizacion() {
               placeholder="Ej. Jose Rangel"
             />
           </div>
-          <div className=''>
+          <div className='mb-2'>
             <label htmlFor='observaciones' className='font-bold text-gray-500 mb-2'>Observaciones</label>
             <input 
               id='observaciones'
@@ -137,12 +136,17 @@ export default function FormularioCotizacion() {
           </div>
         </div>
 
-        <input 
+        <Button 
           type='submit'
-          className='w-full p-3 mt-6 bg-sky-800 rounded-md text-white uppercase font-bold mr-1 hover:bg-sky-700 transition-colors cursor-pointer'
-          value={datos._id ? 'Guardar cambios' : 'Agregar cotizacion'}
-        />
+          sx={{padding: '12px', marginTop: 1, backgroundColor: '#075985'}}
+          variant="contained"
+          size="large"
+          fullWidth
+          disabled={results.isLoading || resultsEditar.isLoading}
+          endIcon={(results.isLoading || resultsEditar.isLoading ) && <CircularProgress size={24} />}
+        >
+          {datos._id ? 'Guardar cambios' : 'Agregar cotizacion'}
+        </Button>
       </form>
-    </>
   )
 }
